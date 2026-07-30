@@ -12,7 +12,11 @@ import {
   Kanban, 
   LogOut, 
   Settings,
-  Bell
+  Bell,
+  ClipboardList,
+  BookOpen,
+  Users,
+  ToggleLeft,
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { User } from "@supabase/supabase-js"
@@ -42,6 +46,12 @@ const navItems = [
   { href: "/dashboard/releases", icon: Rocket, label: "Releases" },
   { href: "/dashboard/bugs", icon: Bug, label: "Bugs" },
   { href: "/dashboard/sprint", icon: Kanban, label: "Sprint Board" },
+]
+
+const flagNavItems = [
+  { href: "/dashboard/groups", icon: Users, label: "Groups" },
+  { href: "/dashboard/audit-logs", icon: ClipboardList, label: "Audit Logs" },
+  { href: "/dashboard/sdk-docs", icon: BookOpen, label: "SDK Docs" },
 ]
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
@@ -169,7 +179,28 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               )
             })}
             
-            <div className="mt-8 mb-2 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <div className="mt-6 mb-2 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Feature Flags
+            </div>
+            {flagNavItems.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                    isActive
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  <item.icon size={18} />
+                  {item.label}
+                </Link>
+              )
+            })}
+
+            <div className="mt-6 mb-2 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Settings
             </div>
             <Link

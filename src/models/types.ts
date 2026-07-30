@@ -16,6 +16,15 @@ export interface FeatureFlag {
   created_at: string;
 }
 
+export interface Group {
+  id: string;
+  name: string;
+  description: string | null;
+  member_ids: string[] | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface EnvironmentOverride {
   id: string;
   flag_id: string;
@@ -42,6 +51,7 @@ export interface RolloutRule {
 
 export interface FlagAuditLog {
   id: string;
+  flag_id: string | null;
   action: string;
   performed_by: string;
   old_value: any;
