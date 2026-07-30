@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import {
   Users,
   Plus,
@@ -8,13 +8,14 @@ import {
   RefreshCw,
   Pencil,
   Trash2,
-  X,
   AlertCircle,
   UserCheck,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Dialog,
   DialogContent,
@@ -33,8 +34,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 
 interface Group {
   id: string
@@ -43,6 +42,12 @@ interface Group {
   member_ids: string[] | null
   created_at: string
   updated_at: string
+}
+
+interface GroupForm {
+  name: string
+  description: string
+  memberIds: string
 }
 
 export default function GroupsPage() {
@@ -54,26 +59,25 @@ export default function GroupsPage() {
   const [showCreate, setShowCreate] = useState(false)
   const [editGroup, setEditGroup] = useState<Group | null>(null)
   const [deleteGroup, setDeleteGroup] = useState<Group | null>(null)
-  const [form, setForm] = useState({ name: "", description: "", memberIds: "" })
+  const [form, setForm] = useState<GroupForm>({ name: "", description: "", memberIds: "" })
   const [submitting, setSubmitting] = useState(false)
 
-  const fetchGroups = async () => {
+  const fetchGroups = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
       const res = await fetch("/api/groups")
       if (!res.ok) throw new Error("Failed to load groups")
-      const data = await res.json()
+      const data: Group[] = await res.json()
       setGroups(data)
-      setFiltered(data)
-    } catch (e: any) {
-      setError(e.message)
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Unknown error")
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  useEffect(() => { fetchGroups() }, [])
+  useEffect(() => { fetchGroups() }, [fetchGroups])
 
   useEffect(() => {
     if (!search.trim()) { setFiltered(groups); return }
@@ -85,12 +89,12 @@ export default function GroupsPage() {
   }, [search, groups])
 
   const openEdit = (g: Group) => {
-    setEditGroup(g)
     setForm({
       name: g.name,
       description: g.description ?? "",
       memberIds: (g.member_ids ?? []).join(", "),
     })
+    setEditGroup(g)
   }
 
   const openCreate = () => {
@@ -98,21 +102,27 @@ export default function GroupsPage() {
     setShowCreate(true)
   }
 
+  const parseMemberIds = (raw: string) =>
+    raw.split(",").map(s => s.trim()).filter(Boolean)
+
   const handleSubmitCreate = async () => {
     setSubmitting(true)
     try {
-      const member_ids = form.memberIds.split(",").map(s => s.trim()).filter(Boolean)
       const res = await fetch("/api/groups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name, description: form.description || undefined, member_ids }),
+        body: JSON.stringify({
+          name: form.name,
+          description: form.description || undefined,
+          member_ids: parseMemberIds(form.memberIds),
+        }),
       })
       if (!res.ok) { const d = await res.json(); throw new Error(d.error) }
       toast.success(`Group "${form.name}" created`)
       setShowCreate(false)
       fetchGroups()
-    } catch (e: any) {
-      toast.error(e.message)
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Failed to create group")
     } finally {
       setSubmitting(false)
     }
@@ -122,18 +132,21 @@ export default function GroupsPage() {
     if (!editGroup) return
     setSubmitting(true)
     try {
-      const member_ids = form.memberIds.split(",").map(s => s.trim()).filter(Boolean)
       const res = await fetch(`/api/groups/${editGroup.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name, description: form.description || undefined, member_ids }),
+        body: JSON.stringify({
+          name: form.name,
+          description: form.description || undefined,
+          member_ids: parseMemberIds(form.memberIds),
+        }),
       })
       if (!res.ok) { const d = await res.json(); throw new Error(d.error) }
-      toast.success("Group updated")
+      toast.success("Group updated successfully")
       setEditGroup(null)
       fetchGroups()
-    } catch (e: any) {
-      toast.error(e.message)
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Failed to update group")
     } finally {
       setSubmitting(false)
     }
@@ -147,45 +160,13 @@ export default function GroupsPage() {
       toast.success(`Group "${deleteGroup.name}" deleted`)
       setDeleteGroup(null)
       fetchGroups()
-    } catch (e: any) {
-      toast.error(e.message)
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "Failed to delete group")
     }
   }
 
-  const GroupFormFields = () => (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="group-name">Group Name</Label>
-        <Input
-          id="group-name"
-          placeholder="e.g. beta-users"
-          value={form.name}
-          onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="group-description">Description</Label>
-        <Textarea
-          id="group-description"
-          placeholder="Optional description…"
-          rows={2}
-          value={form.description}
-          onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="group-members">Member IDs</Label>
-        <Textarea
-          id="group-members"
-          placeholder="Comma-separated user IDs, e.g. user_1, user_2, user_3"
-          rows={3}
-          value={form.memberIds}
-          onChange={e => setForm(f => ({ ...f, memberIds: e.target.value }))}
-        />
-        <p className="text-xs text-muted-foreground">Enter user IDs separated by commas.</p>
-      </div>
-    </div>
-  )
+  const updateForm = (field: keyof GroupForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm(f => ({ ...f, [field]: e.target.value }))
 
   return (
     <div className="space-y-6">
@@ -197,7 +178,9 @@ export default function GroupsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Groups</h1>
-            <p className="text-sm text-muted-foreground">Manage user groups for targeted feature flag rollouts.</p>
+            <p className="text-sm text-muted-foreground">
+              Manage user groups for targeted feature flag rollouts.
+            </p>
           </div>
         </div>
         <Button id="create-group-btn" onClick={openCreate}>
@@ -209,14 +192,18 @@ export default function GroupsPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="border rounded-xl p-4 bg-card flex items-center gap-3">
-          <div className="p-2 bg-blue-500/10 rounded-lg"><Users className="w-5 h-5 text-blue-500" /></div>
+          <div className="p-2 bg-blue-500/10 rounded-lg">
+            <Users className="w-5 h-5 text-blue-500" />
+          </div>
           <div>
             <div className="text-2xl font-bold">{groups.length}</div>
             <div className="text-xs text-muted-foreground">Total Groups</div>
           </div>
         </div>
         <div className="border rounded-xl p-4 bg-card flex items-center gap-3">
-          <div className="p-2 bg-green-500/10 rounded-lg"><UserCheck className="w-5 h-5 text-green-500" /></div>
+          <div className="p-2 bg-green-500/10 rounded-lg">
+            <UserCheck className="w-5 h-5 text-green-500" />
+          </div>
           <div>
             <div className="text-2xl font-bold">
               {groups.reduce((acc, g) => acc + (g.member_ids?.length ?? 0), 0)}
@@ -232,7 +219,7 @@ export default function GroupsPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             id="group-search"
-            placeholder="Search groups…"
+            placeholder="Search groups by name or description…"
             className="pl-9"
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -265,17 +252,26 @@ export default function GroupsPage() {
       ) : filtered.length === 0 ? (
         <div className="border rounded-xl p-16 text-center text-muted-foreground bg-card">
           <Users className="w-12 h-12 mx-auto mb-4 opacity-30" />
-          <p className="font-medium text-lg">No groups found</p>
-          <p className="text-sm mt-1">Create a group to start targeting users by group membership.</p>
-          <Button className="mt-4" onClick={openCreate} id="empty-create-group-btn">
-            <Plus className="w-4 h-4 mr-2" />
-            Create First Group
-          </Button>
+          <p className="font-medium text-lg">
+            {search ? "No groups match your search" : "No groups yet"}
+          </p>
+          <p className="text-sm mt-1">
+            {search ? "Try a different keyword." : "Create a group to start targeting users by group membership."}
+          </p>
+          {!search && (
+            <Button className="mt-4" onClick={openCreate} id="empty-create-group-btn">
+              <Plus className="w-4 h-4 mr-2" />
+              Create First Group
+            </Button>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map(group => (
-            <div key={group.id} className="border rounded-xl p-5 bg-card hover:shadow-md transition-shadow group/card">
+            <div
+              key={group.id}
+              className="border rounded-xl p-5 bg-card hover:shadow-md transition-all group/card"
+            >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className="p-1.5 bg-primary/10 rounded-md shrink-0">
@@ -283,40 +279,62 @@ export default function GroupsPage() {
                   </div>
                   <h3 className="font-semibold truncate">{group.name}</h3>
                 </div>
-                <div className="flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity shrink-0">
-                  <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEdit(group)} id={`edit-group-${group.id}`}>
+                <div className="flex items-center gap-1 opacity-0 group-hover/card:opacity-100 transition-opacity shrink-0 ml-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7"
+                    onClick={() => openEdit(group)}
+                    id={`edit-group-${group.id}`}
+                  >
                     <Pencil className="w-3.5 h-3.5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setDeleteGroup(group)} id={`delete-group-${group.id}`}>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 text-destructive hover:text-destructive hover:bg-destructive/10"
+                    onClick={() => setDeleteGroup(group)}
+                    id={`delete-group-${group.id}`}
+                  >
                     <Trash2 className="w-3.5 h-3.5" />
                   </Button>
                 </div>
               </div>
 
               {group.description && (
-                <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{group.description}</p>
+                <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                  {group.description}
+                </p>
               )}
 
               <div className="mt-4 pt-3 border-t flex items-center justify-between">
                 <Badge variant="secondary" className="text-xs">
                   <UserCheck className="w-3 h-3 mr-1" />
-                  {group.member_ids?.length ?? 0} members
+                  {group.member_ids?.length ?? 0}{" "}
+                  {(group.member_ids?.length ?? 0) === 1 ? "member" : "members"}
                 </Badge>
                 <span className="text-xs text-muted-foreground">
-                  {new Date(group.created_at).toLocaleDateString()}
+                  {new Date(group.created_at).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                 </span>
               </div>
 
               {(group.member_ids ?? []).length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-1">
-                  {(group.member_ids ?? []).slice(0, 4).map(id => (
-                    <span key={id} className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded">
+                  {(group.member_ids ?? []).slice(0, 3).map(id => (
+                    <span
+                      key={id}
+                      className="text-xs font-mono bg-muted px-1.5 py-0.5 rounded max-w-[120px] truncate"
+                    >
                       {id}
                     </span>
                   ))}
-                  {(group.member_ids ?? []).length > 4 && (
+                  {(group.member_ids ?? []).length > 3 && (
                     <span className="text-xs text-muted-foreground px-1.5 py-0.5">
-                      +{(group.member_ids ?? []).length - 4} more
+                      +{(group.member_ids ?? []).length - 3} more
                     </span>
                   )}
                 </div>
@@ -327,15 +345,55 @@ export default function GroupsPage() {
       )}
 
       {/* Create Dialog */}
-      <Dialog open={showCreate} onOpenChange={setShowCreate}>
-        <DialogContent>
+      <Dialog open={showCreate} onOpenChange={open => { if (!open) setShowCreate(false) }}>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Create New Group</DialogTitle>
           </DialogHeader>
-          <GroupFormFields />
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label htmlFor="create-group-name">Group Name <span className="text-destructive">*</span></Label>
+              <Input
+                id="create-group-name"
+                placeholder="e.g. beta-users, internal-team"
+                value={form.name}
+                onChange={updateForm("name")}
+                autoFocus
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="create-group-description">Description</Label>
+              <Textarea
+                id="create-group-description"
+                placeholder="Optional description of this group's purpose"
+                rows={2}
+                value={form.description}
+                onChange={updateForm("description")}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="create-group-members">Member IDs</Label>
+              <Textarea
+                id="create-group-members"
+                placeholder="Comma-separated user IDs, e.g. user_1, user_2, user_3"
+                rows={3}
+                value={form.memberIds}
+                onChange={updateForm("memberIds")}
+              />
+              <p className="text-xs text-muted-foreground">
+                Enter the user IDs of members, separated by commas.
+              </p>
+            </div>
+          </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
-            <Button onClick={handleSubmitCreate} disabled={submitting || !form.name} id="confirm-create-group-btn">
+            <Button variant="outline" onClick={() => setShowCreate(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitCreate}
+              disabled={submitting || !form.name.trim()}
+              id="confirm-create-group-btn"
+            >
               {submitting ? "Creating…" : "Create Group"}
             </Button>
           </DialogFooter>
@@ -343,15 +401,54 @@ export default function GroupsPage() {
       </Dialog>
 
       {/* Edit Dialog */}
-      <Dialog open={!!editGroup} onOpenChange={() => setEditGroup(null)}>
-        <DialogContent>
+      <Dialog open={!!editGroup} onOpenChange={open => { if (!open) setEditGroup(null) }}>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Edit Group</DialogTitle>
           </DialogHeader>
-          <GroupFormFields />
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label htmlFor="edit-group-name">Group Name <span className="text-destructive">*</span></Label>
+              <Input
+                id="edit-group-name"
+                placeholder="e.g. beta-users"
+                value={form.name}
+                onChange={updateForm("name")}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="edit-group-description">Description</Label>
+              <Textarea
+                id="edit-group-description"
+                placeholder="Optional description"
+                rows={2}
+                value={form.description}
+                onChange={updateForm("description")}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="edit-group-members">Member IDs</Label>
+              <Textarea
+                id="edit-group-members"
+                placeholder="Comma-separated user IDs"
+                rows={3}
+                value={form.memberIds}
+                onChange={updateForm("memberIds")}
+              />
+              <p className="text-xs text-muted-foreground">
+                Enter the user IDs of members, separated by commas.
+              </p>
+            </div>
+          </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setEditGroup(null)}>Cancel</Button>
-            <Button onClick={handleSubmitEdit} disabled={submitting || !form.name} id="confirm-edit-group-btn">
+            <Button variant="outline" onClick={() => setEditGroup(null)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitEdit}
+              disabled={submitting || !form.name.trim()}
+              id="confirm-edit-group-btn"
+            >
               {submitting ? "Saving…" : "Save Changes"}
             </Button>
           </DialogFooter>
@@ -359,18 +456,22 @@ export default function GroupsPage() {
       </Dialog>
 
       {/* Delete Confirmation */}
-      <AlertDialog open={!!deleteGroup} onOpenChange={() => setDeleteGroup(null)}>
+      <AlertDialog open={!!deleteGroup} onOpenChange={open => { if (!open) setDeleteGroup(null) }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Group</AlertDialogTitle>
+            <AlertDialogTitle>Delete &quot;{deleteGroup?.name}&quot;?</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete <strong>{deleteGroup?.name}</strong>? This action cannot be undone.
-              Any targeting rules referencing this group name will stop matching.
+              This action cannot be undone. Any feature flag targeting rules that reference this
+              group name will stop matching new requests.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive hover:bg-destructive/90" id="confirm-delete-group-btn">
+            <AlertDialogAction
+              onClick={handleDelete}
+              className="bg-destructive hover:bg-destructive/90"
+              id="confirm-delete-group-btn"
+            >
               Delete Group
             </AlertDialogAction>
           </AlertDialogFooter>

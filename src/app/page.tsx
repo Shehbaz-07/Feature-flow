@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Layers, Rocket, Bug, Kanban, ArrowRight, ShieldCheck } from "lucide-react"
+import { Layers, Rocket, Bug, Kanban, ArrowRight, ShieldCheck, FolderKanban } from "lucide-react"
 
 export default function LandingPage() {
   return (
@@ -64,7 +64,7 @@ export default function LandingPage() {
             {/* Feature 1 */}
             <div className="p-6 rounded-2xl bg-card border shadow-sm hover:shadow-md transition-shadow group">
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FolderKanbanIcon size={24} />
+                <FolderKanban size={24} />
               </div>
               <h3 className="font-semibold text-lg mb-2">Project Spaces</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -130,27 +130,5 @@ export default function LandingPage() {
         <p className="text-sm">Built for modern software teams.</p>
       </footer>
     </div>
-  )
-}
-
-function FolderKanbanIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
-      <path d="M8 10v4" />
-      <path d="M12 10v2" />
-      <path d="M16 10v6" />
-    </svg>
   )
 }

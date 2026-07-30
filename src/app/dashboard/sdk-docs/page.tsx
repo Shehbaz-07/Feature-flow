@@ -19,32 +19,43 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "sonner"
 
-// ─── Code snippets per language ───────────────────────────────────────────────
+// ─── Language definitions ──────────────────────────────────────────────────────
 
 const SDK_LANGUAGES = [
-  { id: "python",     label: "Python",     icon: "🐍" },
-  { id: "javascript", label: "JavaScript", icon: "🟨" },
-  { id: "typescript", label: "TypeScript", icon: "🔷" },
-  { id: "go",         label: "Go",         icon: "🐹" },
-  { id: "java",       label: "Java",       icon: "☕" },
-  { id: "ruby",       label: "Ruby",       icon: "💎" },
-  { id: "curl",       label: "cURL",       icon: "🌐" },
-]
+  { id: "python",     label: "Python"     },
+  { id: "javascript", label: "JavaScript" },
+  { id: "typescript", label: "TypeScript" },
+  { id: "go",         label: "Go"         },
+  { id: "java",       label: "Java"       },
+  { id: "ruby",       label: "Ruby"       },
+  { id: "curl",       label: "cURL"       },
+] as const
 
-const SNIPPETS: Record<string, Record<string, string>> = {
+type LangId = (typeof SDK_LANGUAGES)[number]["id"]
+type SectionId = "installation" | "initialize" | "evaluate" | "rollout"
+
+// ─── Code snippets ─────────────────────────────────────────────────────────────
+
+const SNIPPETS: Record<SectionId, Record<LangId, string>> = {
   installation: {
-    python: `pip install featureflow-sdk`,
-    javascript: `npm install @featureflow/sdk`,
-    typescript: `npm install @featureflow/sdk`,
-    go: `go get github.com/featureflow/sdk-go`,
-    java: `// Add to your pom.xml
+    python:     `pip install featureflow-sdk`,
+    javascript: `npm install @featureflow/sdk
+# or
+yarn add @featureflow/sdk`,
+    typescript: `npm install @featureflow/sdk
+# Types are bundled — no @types package needed`,
+    go:         `go get github.com/featureflow/sdk-go`,
+    java: `<!-- Add to pom.xml -->
 <dependency>
   <groupId>io.featureflow</groupId>
   <artifactId>featureflow-sdk</artifactId>
   <version>1.0.0</version>
 </dependency>`,
-    ruby: `gem install featureflow-sdk`,
-    curl: `# No installation needed – use curl directly`,
+    ruby: `gem install featureflow-sdk
+# or add to Gemfile:
+# gem 'featureflow-sdk'`,
+    curl: `# No SDK installation needed.
+# Use the REST API directly with any HTTP client.`,
   },
 
   initialize: {
@@ -68,9 +79,7 @@ const client = new FeatureFlowClient({
 });`,
     go: `package main
 
-import (
-  "github.com/featureflow/sdk-go"
-)
+import featureflow "github.com/featureflow/sdk-go"
 
 func main() {
   client := featureflow.NewClient(featureflow.Config{
@@ -93,13 +102,13 @@ client = Featureflow::Client.new(
   api_url: "https://your-app.vercel.app",
   environment_id: "your-environment-id"
 )`,
-    curl: `# Set your environment ID as a variable:
-export ENV_ID="your-environment-id"
-export API_URL="https://your-app.vercel.app"`,
+    curl: `# Set these in your shell environment:
+export API_URL="https://your-app.vercel.app"
+export ENV_ID="your-environment-id"`,
   },
 
   evaluate: {
-    python: `# Basic flag evaluation
+    python: `# Evaluate a flag for a user
 is_enabled = client.is_enabled(
     flag_key="new-checkout-flow",
     user_id="user_123",
@@ -109,8 +118,8 @@ is_enabled = client.is_enabled(
 if is_enabled:
     print("New checkout flow is ON")
 else:
-    print("Showing old checkout flow")`,
-    javascript: `// Basic flag evaluation
+    print("Showing legacy checkout")`,
+    javascript: `// Evaluate a flag for a user
 const isEnabled = await client.isEnabled("new-checkout-flow", {
   userId: "user_123",
   groups: ["beta-users"],
@@ -119,9 +128,9 @@ const isEnabled = await client.isEnabled("new-checkout-flow", {
 if (isEnabled) {
   console.log("New checkout flow is ON");
 } else {
-  console.log("Showing old checkout flow");
+  console.log("Showing legacy checkout");
 }`,
-    typescript: `// With full type safety
+    typescript: `// Fully typed evaluation
 const isEnabled: boolean = await client.isEnabled("new-checkout-flow", {
   userId: "user_123",
   groups: ["beta-users"],
@@ -145,7 +154,8 @@ if enabled {
   fmt.Println("New checkout flow is ON")
 }`,
     java: `// Evaluate a flag for a user
-boolean isEnabled = client.isEnabled("new-checkout-flow",
+boolean isEnabled = client.isEnabled(
+  "new-checkout-flow",
   EvaluationContext.builder()
     .userId("user_123")
     .groups(List.of("beta-users"))
@@ -162,7 +172,7 @@ enabled = client.enabled?(
   groups: ["beta-users"]
 )
 
-puts enabled ? "New checkout flow is ON" : "Showing old checkout"`,
+puts enabled ? "New checkout flow is ON" : "Showing legacy checkout"`,
     curl: `curl -s -X POST "$API_URL/api/flags/evaluate" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -170,53 +180,52 @@ puts enabled ? "New checkout flow is ON" : "Showing old checkout"`,
     "environmentId": "'"$ENV_ID"'",
     "userId": "user_123",
     "groups": ["beta-users"]
-  }'`,
+  }' | jq`,
   },
 
   rollout: {
-    python: `# The SDK automatically handles percentage rollouts.
-# Users are deterministically bucketed — pass a stable userId.
+    python: `# Percentage rollouts are handled server-side automatically.
+# Pass a stable user_id to ensure consistent bucketing.
+#
+# Algorithm: hash(flagKey + "-" + userId) % 100 < rolloutPercentage
 
-# 10% rollout example — only 10% of users will see True
 is_enabled = client.is_enabled(
     flag_key="dark-mode-v2",
-    user_id="user_abc",  # Stable ID ensures consistent bucketing
-)
-
-# The same user will ALWAYS get the same result.`,
-    javascript: `// Percentage rollout is handled server-side.
-// Pass a consistent userId so the same user always gets the same result.
-
-const isEnabled = await client.isEnabled("dark-mode-v2", {
-  userId: "user_abc", // must be stable across sessions
-});
-
-// user_abc will always see the same result (deterministic hashing)`,
-    typescript: `// Percentage rollout is transparent to SDK consumers.
-// The server uses deterministic hashing: hash(flagKey + userId) % 100
-// If the result < rolloutPercentage, the flag returns true.
+    user_id="user_abc",   # Same user always gets the same result
+)`,
+    javascript: `// Percentage rollout is fully server-side and transparent.
+// The server deterministically hashes flagKey + userId to bucket users.
+// Pass a stable, persistent userId for consistent results.
 
 const isEnabled = await client.isEnabled("dark-mode-v2", {
-  userId: req.user.id, // use a stable, persistent user identifier
+  userId: "user_abc",   // same user always gets the same result
 });`,
-    go: `// Rollouts are server-side. Pass a stable UserID.
-// The server hashes (flagKey + userId) to bucket the user deterministically.
+    typescript: `// The rollout engine uses: Math.abs(djb2(flagKey + "-" + userId)) % 100
+// If the result < rolloutPercentage → flag is ON for that user.
+// Pass a stable, session-persistent identifier.
+
+const isEnabled: boolean = await client.isEnabled("dark-mode-v2", {
+  userId: req.user.id,
+});`,
+    go: `// Rollout is server-side. Pass a stable UserID.
+// The server hashes (flagKey + "-" + userId) deterministically.
 
 enabled, _ := client.IsEnabled("dark-mode-v2", featureflow.Context{
   UserID: "user_abc",
 })`,
     java: `// Rollout percentage is configured in the FeatureFlow dashboard.
-// Pass a stable userId for consistent bucketing.
+// Pass a stable userId for consistent bucketing across sessions.
 
-boolean enabled = client.isEnabled("dark-mode-v2",
+boolean enabled = client.isEnabled(
+  "dark-mode-v2",
   EvaluationContext.builder().userId("user_abc").build()
 );`,
-    ruby: `# The rollout engine uses deterministic hashing server-side.
+    ruby: `# The rollout engine deterministically hashes flagKey + userId.
 # Pass a stable user_id to ensure consistent results per user.
 
 enabled = client.enabled?("dark-mode-v2", user_id: "user_abc")`,
-    curl: `# The server returns consistent results for the same userId.
-# No special params needed — just include userId.
+    curl: `# The server consistently returns the same result for the same userId.
+# No special parameters — just include userId.
 
 curl -s -X POST "$API_URL/api/flags/evaluate" \\
   -H "Content-Type: application/json" \\
@@ -224,51 +233,93 @@ curl -s -X POST "$API_URL/api/flags/evaluate" \\
     "flagKey": "dark-mode-v2",
     "environmentId": "'"$ENV_ID"'",
     "userId": "user_abc"
-  }'`,
+  }' | jq`,
   },
 }
 
-const SECTIONS = [
-  { id: "installation", label: "Installation",  icon: Terminal,    description: "Install the SDK for your language." },
-  { id: "initialize",   label: "Initialize",    icon: Server,      description: "Configure the client with your environment." },
-  { id: "evaluate",     label: "Evaluate Flag", icon: Zap,         description: "Check if a flag is enabled for a user/group." },
-  { id: "rollout",      label: "Rollout",       icon: FlaskConical,description: "Understand deterministic percentage rollouts." },
+// ─── Section definitions ───────────────────────────────────────────────────────
+
+const SECTIONS: Array<{
+  id: SectionId
+  label: string
+  icon: React.ComponentType<{ className?: string }>
+  description: string
+}> = [
+  {
+    id: "installation",
+    label: "Installation",
+    icon: Terminal,
+    description: "Install the SDK package for your language or use the REST API directly.",
+  },
+  {
+    id: "initialize",
+    label: "Initialize",
+    icon: Server,
+    description: "Configure the client with your API URL and environment ID.",
+  },
+  {
+    id: "evaluate",
+    label: "Evaluate Flag",
+    icon: Zap,
+    description: "Check whether a feature flag is enabled for a given user or group.",
+  },
+  {
+    id: "rollout",
+    label: "Percentage Rollout",
+    icon: FlaskConical,
+    description: "Understand how deterministic percentage-based rollouts work.",
+  },
 ]
 
-// ─── CodeBlock ────────────────────────────────────────────────────────────────
-function CodeBlock({ code, id }: { code: string; id: string }) {
+// ─── API Parameters table ──────────────────────────────────────────────────────
+
+const API_PARAMS = [
+  { param: "flagKey",       type: "string",   required: true,  desc: "The unique key of the feature flag." },
+  { param: "environmentId", type: "UUID",     required: true,  desc: "The UUID of the target environment." },
+  { param: "userId",        type: "string",   required: false, desc: "Stable user identifier for targeting and rollouts." },
+  { param: "groups",        type: "string[]", required: false, desc: "Array of group names the user belongs to." },
+]
+
+// ─── CodeBlock component ───────────────────────────────────────────────────────
+
+function CodeBlock({ code, blockId }: { code: string; blockId: string }) {
   const [copied, setCopied] = useState(false)
 
-  const copy = () => {
+  const handleCopy = () => {
     navigator.clipboard.writeText(code)
     setCopied(true)
-    toast.success("Copied to clipboard!")
+    toast.success("Copied to clipboard")
     setTimeout(() => setCopied(false), 2000)
   }
 
   return (
     <div className="relative group/code">
-      <pre className="bg-zinc-950 dark:bg-zinc-900 text-zinc-100 rounded-xl p-5 text-sm overflow-x-auto leading-relaxed border border-zinc-800">
+      <pre className="bg-zinc-950 dark:bg-zinc-900 text-zinc-100 rounded-xl p-5 text-sm overflow-x-auto leading-relaxed border border-zinc-800 min-h-[80px]">
         <code>{code}</code>
       </pre>
       <Button
-        id={id}
-        variant="outline"
+        id={blockId}
+        variant="ghost"
         size="sm"
-        onClick={copy}
-        className="absolute top-3 right-3 opacity-0 group-hover/code:opacity-100 transition-opacity bg-zinc-800 border-zinc-700 text-zinc-100 hover:bg-zinc-700 hover:text-zinc-100"
+        onClick={handleCopy}
+        className="absolute top-3 right-3 opacity-0 group-hover/code:opacity-100 transition-opacity h-7 px-2 bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-zinc-700 hover:text-white"
       >
-        {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-        {copied ? "Copied!" : "Copy"}
+        {copied
+          ? <><Check className="w-3.5 h-3.5 mr-1" />Copied</>
+          : <><Copy className="w-3.5 h-3.5 mr-1" />Copy</>
+        }
       </Button>
     </div>
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Page ──────────────────────────────────────────────────────────────────────
+
 export default function SDKDocsPage() {
-  const [activeSection, setActiveSection] = useState("installation")
-  const [language, setLanguage] = useState("javascript")
+  const [activeSection, setActiveSection] = useState<SectionId>("installation")
+  const [language, setLanguage] = useState<LangId>("javascript")
+
+  const currentSection = SECTIONS.find(s => s.id === activeSection)!
 
   return (
     <div className="space-y-6 max-w-5xl">
@@ -280,65 +331,79 @@ export default function SDKDocsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">SDK Documentation</h1>
           <p className="text-sm text-muted-foreground">
-            Integrate FeatureFlow into your application in minutes. Supports 6+ languages.
+            Integrate FeatureFlow into your app in minutes — supports 7 languages.
           </p>
         </div>
       </div>
 
-      {/* Language badges */}
+      {/* Supported Languages */}
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-sm text-muted-foreground mr-1">Supported languages:</span>
+        <span className="text-sm text-muted-foreground">Supported:</span>
         {SDK_LANGUAGES.map(lang => (
-          <Badge key={lang.id} variant="secondary" className="text-xs cursor-default">
-            {lang.icon} {lang.label}
+          <Badge key={lang.id} variant="secondary" className="text-xs font-medium">
+            {lang.label}
           </Badge>
         ))}
       </div>
 
-      {/* Quick Overview Cards */}
+      {/* Overview cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="border rounded-xl p-4 bg-card flex gap-3">
-          <div className="p-2 bg-blue-500/10 rounded-lg shrink-0"><Globe className="w-5 h-5 text-blue-500" /></div>
+        <div className="border rounded-xl p-4 bg-card flex gap-3 items-start">
+          <div className="p-2 bg-blue-500/10 rounded-lg shrink-0">
+            <Globe className="w-5 h-5 text-blue-500" />
+          </div>
           <div>
             <p className="font-semibold text-sm">REST API</p>
-            <p className="text-xs text-muted-foreground mt-0.5">HTTP endpoint compatible with any language or framework.</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              A single HTTP endpoint compatible with any language or framework.
+            </p>
           </div>
         </div>
-        <div className="border rounded-xl p-4 bg-card flex gap-3">
-          <div className="p-2 bg-purple-500/10 rounded-lg shrink-0"><Layers className="w-5 h-5 text-purple-500" /></div>
+        <div className="border rounded-xl p-4 bg-card flex gap-3 items-start">
+          <div className="p-2 bg-purple-500/10 rounded-lg shrink-0">
+            <Layers className="w-5 h-5 text-purple-500" />
+          </div>
           <div>
             <p className="font-semibold text-sm">Deterministic Rollouts</p>
-            <p className="text-xs text-muted-foreground mt-0.5">Consistent bucketing per user — no random flip-flopping.</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Consistent bucketing per user — no random flip-flopping between sessions.
+            </p>
           </div>
         </div>
-        <div className="border rounded-xl p-4 bg-card flex gap-3">
-          <div className="p-2 bg-green-500/10 rounded-lg shrink-0"><Zap className="w-5 h-5 text-green-500" /></div>
+        <div className="border rounded-xl p-4 bg-card flex gap-3 items-start">
+          <div className="p-2 bg-green-500/10 rounded-lg shrink-0">
+            <Zap className="w-5 h-5 text-green-500" />
+          </div>
           <div>
-            <p className="font-semibold text-sm">Cached Responses</p>
-            <p className="text-xs text-muted-foreground mt-0.5">Server-side caching for &lt;1ms evaluation latency.</p>
+            <p className="font-semibold text-sm">Server-side Cache</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              In-memory caching keeps evaluation latency under 1 ms.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Docs Body */}
+      {/* Docs Layout */}
       <div className="flex gap-6">
-        {/* Sidebar nav */}
+        {/* Desktop Sidebar */}
         <aside className="hidden md:flex flex-col gap-1 w-48 shrink-0">
           {SECTIONS.map(s => {
             const Icon = s.icon
-            const active = activeSection === s.id
+            const active = s.id === activeSection
             return (
               <button
                 key={s.id}
                 id={`sdk-nav-${s.id}`}
                 onClick={() => setActiveSection(s.id)}
-                className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-left transition-colors ${
-                  active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-left transition-colors w-full ${
+                  active
+                    ? "bg-primary text-primary-foreground font-medium"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
-                {s.label}
-                {active && <ChevronRight className="w-3.5 h-3.5 ml-auto" />}
+                <span className="flex-1">{s.label}</span>
+                {active && <ChevronRight className="w-3.5 h-3.5 shrink-0" />}
               </button>
             )
           })}
@@ -346,10 +411,13 @@ export default function SDKDocsPage() {
 
         {/* Content */}
         <div className="flex-1 min-w-0 space-y-4">
-          {/* Mobile section tabs */}
+          {/* Mobile: section tabs */}
           <div className="md:hidden">
-            <Tabs value={activeSection} onValueChange={setActiveSection}>
-              <TabsList className="flex flex-wrap h-auto gap-1">
+            <Tabs
+              value={activeSection}
+              onValueChange={v => setActiveSection(v as SectionId)}
+            >
+              <TabsList className="h-auto flex-wrap gap-1">
                 {SECTIONS.map(s => (
                   <TabsTrigger key={s.id} value={s.id} className="text-xs">
                     {s.label}
@@ -359,30 +427,32 @@ export default function SDKDocsPage() {
             </Tabs>
           </div>
 
-          {/* Description */}
-          <div className="border rounded-xl p-4 bg-card">
-            <div className="flex items-center gap-2 mb-1">
-              {(() => {
-                const s = SECTIONS.find(x => x.id === activeSection)
-                if (!s) return null
-                const Icon = s.icon
-                return <>
-                  <Icon className="w-4 h-4 text-primary" />
-                  <h2 className="font-semibold">{s.label}</h2>
-                </>
-              })()}
+          {/* Section description card */}
+          <div className="border rounded-xl p-4 bg-card flex items-start gap-3">
+            <div className="p-1.5 bg-primary/10 rounded-md shrink-0 mt-0.5">
+              <currentSection.icon className="w-4 h-4 text-primary" />
             </div>
-            <p className="text-sm text-muted-foreground">
-              {SECTIONS.find(x => x.id === activeSection)?.description}
-            </p>
+            <div>
+              <h2 className="font-semibold text-sm">{currentSection.label}</h2>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                {currentSection.description}
+              </p>
+            </div>
           </div>
 
-          {/* Language Tabs */}
-          <Tabs value={language} onValueChange={setLanguage}>
-            <TabsList className="flex-wrap h-auto gap-1 bg-muted p-1">
+          {/* Language tabs + code */}
+          <Tabs
+            value={language}
+            onValueChange={v => setLanguage(v as LangId)}
+          >
+            <TabsList className="h-auto flex-wrap gap-1 bg-muted p-1 rounded-xl">
               {SDK_LANGUAGES.map(lang => (
-                <TabsTrigger key={lang.id} value={lang.id} id={`sdk-lang-${lang.id}`} className="text-xs gap-1.5">
-                  <span>{lang.icon}</span>
+                <TabsTrigger
+                  key={lang.id}
+                  value={lang.id}
+                  id={`sdk-lang-${lang.id}`}
+                  className="text-xs font-medium"
+                >
                   {lang.label}
                 </TabsTrigger>
               ))}
@@ -391,48 +461,60 @@ export default function SDKDocsPage() {
             {SDK_LANGUAGES.map(lang => (
               <TabsContent key={lang.id} value={lang.id} className="mt-3">
                 <CodeBlock
-                  code={SNIPPETS[activeSection]?.[lang.id] ?? "// Coming soon"}
-                  id={`copy-${activeSection}-${lang.id}`}
+                  code={SNIPPETS[activeSection][lang.id]}
+                  blockId={`copy-${activeSection}-${lang.id}`}
                 />
               </TabsContent>
             ))}
           </Tabs>
 
-          {/* API reference */}
+          {/* API Reference table — shown only on the Evaluate section */}
           {activeSection === "evaluate" && (
             <div className="border rounded-xl bg-card overflow-hidden">
-              <div className="p-4 border-b bg-muted/40">
-                <div className="flex items-center gap-2">
-                  <Code2 className="w-4 h-4 text-primary" />
-                  <h3 className="font-semibold text-sm">API Reference — POST /api/flags/evaluate</h3>
-                </div>
+              <div className="px-4 py-3 border-b bg-muted/40 flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-primary" />
+                <h3 className="font-semibold text-sm">
+                  API Reference — <code className="font-mono text-xs">POST /api/flags/evaluate</code>
+                </h3>
               </div>
-              <div className="p-4">
+              <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-left">
-                      <th className="pb-2 text-xs text-muted-foreground uppercase tracking-wider">Parameter</th>
-                      <th className="pb-2 text-xs text-muted-foreground uppercase tracking-wider">Type</th>
-                      <th className="pb-2 text-xs text-muted-foreground uppercase tracking-wider">Required</th>
-                      <th className="pb-2 text-xs text-muted-foreground uppercase tracking-wider">Description</th>
+                    <tr className="border-b">
+                      <th className="px-4 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Parameter
+                      </th>
+                      <th className="px-4 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Type
+                      </th>
+                      <th className="px-4 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Required
+                      </th>
+                      <th className="px-4 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Description
+                      </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y">
-                    {[
-                      { param: "flagKey",       type: "string",   req: true,  desc: "The unique key of the feature flag." },
-                      { param: "environmentId", type: "UUID",     req: true,  desc: "The target environment's UUID." },
-                      { param: "userId",        type: "string",   req: false, desc: "Stable user identifier for targeting & rollouts." },
-                      { param: "groups",        type: "string[]", req: false, desc: "Array of group names the user belongs to." },
-                    ].map(row => (
-                      <tr key={row.param} className="hover:bg-muted/30">
-                        <td className="py-2.5 font-mono text-xs text-primary">{row.param}</td>
-                        <td className="py-2.5 font-mono text-xs text-muted-foreground">{row.type}</td>
-                        <td className="py-2.5">
-                          <Badge variant={row.req ? "default" : "outline"} className="text-xs">
-                            {row.req ? "required" : "optional"}
+                  <tbody>
+                    {API_PARAMS.map((row, idx) => (
+                      <tr key={row.param} className={idx < API_PARAMS.length - 1 ? "border-b" : ""}>
+                        <td className="px-4 py-3 font-mono text-xs text-primary font-semibold">
+                          {row.param}
+                        </td>
+                        <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
+                          {row.type}
+                        </td>
+                        <td className="px-4 py-3">
+                          <Badge
+                            variant={row.required ? "default" : "outline"}
+                            className="text-xs"
+                          >
+                            {row.required ? "required" : "optional"}
                           </Badge>
                         </td>
-                        <td className="py-2.5 text-sm text-muted-foreground">{row.desc}</td>
+                        <td className="px-4 py-3 text-sm text-muted-foreground">
+                          {row.desc}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
