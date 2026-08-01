@@ -114,7 +114,6 @@ const ta: Translations = {
     deleteGroup: "குழுவை நீக்கு", groupCreated: "உருவாக்கப்பட்டது",
     groupUpdated: "குழு வெற்றிகரமாக புதுப்பிக்கப்பட்டது", groupDeleted: "நீக்கப்பட்டது",
   },
-,
   // ── SDK Docs Page ────────────────────────────────────────────────────────────
   sdkDocs: {
     title: "SDK Documentation",

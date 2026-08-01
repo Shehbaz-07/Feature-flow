@@ -114,7 +114,6 @@ const bn: Translations = {
     deleteGroup: "গ্রুপ মুছুন", groupCreated: "তৈরি হয়েছে",
     groupUpdated: "গ্রুপ সফলভাবে আপডেট হয়েছে", groupDeleted: "মুছে গেছে",
   },
-,
   // ── SDK Docs Page ────────────────────────────────────────────────────────────
   sdkDocs: {
     title: "SDK Documentation",

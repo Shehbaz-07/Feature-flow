@@ -113,7 +113,6 @@ const mr: Translations = {
     deleteGroup: "गट हटवा", groupCreated: "तयार केले",
     groupUpdated: "गट यशस्वीरित्या अपडेट झाला", groupDeleted: "हटवले",
   },
-,
   // ── SDK Docs Page ────────────────────────────────────────────────────────────
   sdkDocs: {
     title: "SDK Documentation",

@@ -112,7 +112,6 @@ const kn: Translations = {
     deleteGroup: "ಗುಂಪನ್ನು ಅಳಿಸಿ", groupCreated: "ರಚಿಸಲಾಗಿದೆ",
     groupUpdated: "ಗುಂಪನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ", groupDeleted: "ಅಳಿಸಲಾಗಿದೆ",
   },
-,
   // ── SDK Docs Page ────────────────────────────────────────────────────────────
   sdkDocs: {
     title: "SDK Documentation",

@@ -114,7 +114,6 @@ const te: Translations = {
     deleteGroup: "గ్రూప్ తొలగించు", groupCreated: "సృష్టించబడింది",
     groupUpdated: "గ్రూప్ విజయవంతంగా అప్‌డేట్ చేయబడింది", groupDeleted: "తొలగించబడింది",
   },
-,
   // ── SDK Docs Page ────────────────────────────────────────────────────────────
   sdkDocs: {
     title: "SDK Documentation",
