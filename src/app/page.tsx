@@ -3,8 +3,13 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Layers, Rocket, Bug, Kanban, ArrowRight, ShieldCheck, FolderKanban } from "lucide-react"
+import { useTranslation } from "@/lib/i18n/context"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function LandingPage() {
+  const { t } = useTranslation()
+
   return (
     <div className="min-h-screen bg-background selection:bg-primary/20">
       {/* Navigation */}
@@ -16,12 +21,14 @@ export default function LandingPage() {
             </div>
             FeatureFlow
           </div>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium hover:text-primary transition-colors">
-              Sign In
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <Link href="/login" className="text-sm font-medium hover:text-primary transition-colors px-2">
+              {t.nav.signIn}
             </Link>
             <Button asChild>
-              <Link href="/register">Get Started</Link>
+              <Link href="/register">{t.nav.getStarted}</Link>
             </Button>
           </div>
         </div>
@@ -32,23 +39,23 @@ export default function LandingPage() {
         <section className="container mx-auto px-4 pt-20 pb-32 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
             <Rocket size={16} />
-            Ship better software, faster.
+            {t.landing.badge}
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 bg-gradient-to-r from-foreground via-foreground/80 to-muted-foreground bg-clip-text text-transparent max-w-4xl mx-auto">
-            The Ultimate Control Center for Your Software
+            {t.landing.hero}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            FeatureFlow brings projects, features, sprint boards, releases, and bug tracking into one beautiful, lightning-fast platform.
+            {t.landing.heroSub}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="h-12 px-8 text-base group" asChild>
               <Link href="/register">
-                Start for free
+                {t.landing.startFree}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="h-12 px-8 text-base" asChild>
-              <Link href="/login">Sign In</Link>
+              <Link href="/login">{t.landing.signIn}</Link>
             </Button>
           </div>
         </section>
@@ -56,8 +63,8 @@ export default function LandingPage() {
         {/* Features Grid */}
         <section className="container mx-auto px-4 py-20 border-t">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">Everything you need to build</h2>
-            <p className="text-muted-foreground">Replace your entire disjointed toolchain with one elegant solution.</p>
+            <h2 className="text-3xl font-bold tracking-tight mb-4">{t.landing.featuresHeading}</h2>
+            <p className="text-muted-foreground">{t.landing.featuresSub}</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -66,9 +73,9 @@ export default function LandingPage() {
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <FolderKanban size={24} />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Project Spaces</h3>
+              <h3 className="font-semibold text-lg mb-2">{t.landing.feature1Title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Organize your entire portfolio with isolated project workspaces and real-time metrics.
+                {t.landing.feature1Desc}
               </p>
             </div>
 
@@ -77,9 +84,9 @@ export default function LandingPage() {
               <div className="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Kanban size={24} />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Sprint Boards</h3>
+              <h3 className="font-semibold text-lg mb-2">{t.landing.feature2Title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Drag and drop your features across highly responsive agile sprint boards.
+                {t.landing.feature2Desc}
               </p>
             </div>
 
@@ -88,9 +95,9 @@ export default function LandingPage() {
               <div className="w-12 h-12 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Rocket size={24} />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Release Control</h3>
+              <h3 className="font-semibold text-lg mb-2">{t.landing.feature3Title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Plan, track, and deploy your software versions with integrated release management.
+                {t.landing.feature3Desc}
               </p>
             </div>
 
@@ -99,9 +106,9 @@ export default function LandingPage() {
               <div className="w-12 h-12 rounded-lg bg-rose-500/10 text-rose-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Bug size={24} />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Bug Tracking</h3>
+              <h3 className="font-semibold text-lg mb-2">{t.landing.feature4Title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Capture, prioritize, and squash bugs directly linked to your features and releases.
+                {t.landing.feature4Desc}
               </p>
             </div>
           </div>
@@ -112,12 +119,12 @@ export default function LandingPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 mb-6">
             <ShieldCheck size={32} className="text-primary" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight mb-4">Enterprise-grade isolation</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-4">{t.landing.securityHeading}</h2>
           <p className="text-zinc-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Built on top of PostgreSQL with native Row-Level Security. Every piece of your data is mathematically isolated and secure from the ground up.
+            {t.landing.securityDesc}
           </p>
           <Button variant="secondary" size="lg" className="h-12 px-8" asChild>
-            <Link href="/register">Create your workspace</Link>
+            <Link href="/register">{t.landing.createWorkspace}</Link>
           </Button>
         </section>
       </main>
@@ -127,7 +134,7 @@ export default function LandingPage() {
           <Layers size={18} className="text-primary" />
           FeatureFlow
         </div>
-        <p className="text-sm">Built for modern software teams.</p>
+        <p className="text-sm">{t.landing.footerTagline}</p>
       </footer>
     </div>
   )

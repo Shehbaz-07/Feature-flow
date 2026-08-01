@@ -21,6 +21,8 @@ import { createClient } from "@/lib/supabase/client"
 import { User } from "@supabase/supabase-js"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useTranslation } from "@/lib/i18n/context"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,23 +33,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-
-// ─── Nav definitions ────────────────────────────────────────────────────────────
-
-const NAV_MAIN = [
-  { href: "/dashboard",          icon: LayoutDashboard, label: "Dashboard"   },
-  { href: "/dashboard/projects", icon: FolderKanban,    label: "Projects"    },
-  { href: "/dashboard/features", icon: Layers,          label: "Features"    },
-  { href: "/dashboard/releases", icon: Rocket,          label: "Releases"    },
-  { href: "/dashboard/bugs",     icon: Bug,             label: "Bugs"        },
-  { href: "/dashboard/sprint",   icon: Kanban,          label: "Sprint Board"},
-]
-
-const NAV_FLAGS = [
-  { href: "/dashboard/groups",     icon: Users,         label: "Groups"    },
-  { href: "/dashboard/audit-logs", icon: ClipboardList, label: "Audit Logs"},
-  { href: "/dashboard/sdk-docs",   icon: BookOpen,      label: "SDK Docs"  },
-]
 
 // ─── NavLink ────────────────────────────────────────────────────────────────────
 
@@ -96,6 +81,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter()
   const supabase = createClient()
   const [user, setUser] = useState<User | null>(null)
+  const { t } = useTranslation()
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user))
@@ -117,6 +103,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     user?.email?.charAt(0).toUpperCase() ||
     "U"
 
+  // Nav items built inside the component so they pick up translations reactively
+  const NAV_MAIN = [
+    { href: "/dashboard",          icon: LayoutDashboard, label: t.sidebar.dashboard   },
+    { href: "/dashboard/projects", icon: FolderKanban,    label: t.sidebar.projects    },
+    { href: "/dashboard/features", icon: Layers,          label: t.sidebar.features    },
+    { href: "/dashboard/releases", icon: Rocket,          label: t.sidebar.releases    },
+    { href: "/dashboard/bugs",     icon: Bug,             label: t.sidebar.bugs        },
+    { href: "/dashboard/sprint",   icon: Kanban,          label: t.sidebar.sprintBoard },
+  ]
+
+  const NAV_FLAGS = [
+    { href: "/dashboard/groups",     icon: Users,         label: t.sidebar.groups    },
+    { href: "/dashboard/audit-logs", icon: ClipboardList, label: t.sidebar.auditLogs },
+    { href: "/dashboard/sdk-docs",   icon: BookOpen,      label: t.sidebar.sdkDocs   },
+  ]
+
   return (
     <div className="flex min-h-screen bg-zinc-50 dark:bg-zinc-950">
       {/* ── Sidebar ──────────────────────────────────────────────────── */}
@@ -131,7 +133,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto px-3 py-4">
-          <SectionLabel>Workspace</SectionLabel>
+          <SectionLabel>{t.sidebar.workspace}</SectionLabel>
           {NAV_MAIN.map(item => (
             <NavLink
               key={item.href}
@@ -142,7 +144,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             />
           ))}
 
-          <SectionLabel>Feature Flags</SectionLabel>
+          <SectionLabel>{t.sidebar.featureFlags}</SectionLabel>
           {NAV_FLAGS.map(item => (
             <NavLink
               key={item.href}
@@ -153,11 +155,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             />
           ))}
 
-          <SectionLabel>Settings</SectionLabel>
+          <SectionLabel>{t.sidebar.settings}</SectionLabel>
           <NavLink
             href="/dashboard/settings"
             icon={Settings}
-            label="Settings"
+            label={t.sidebar.settings}
             active={pathname === "/dashboard/settings"}
           />
         </nav>
@@ -203,7 +205,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <DropdownMenuItem asChild className="cursor-pointer">
                 <Link href="/dashboard/settings" className="flex items-center">
                   <Settings className="mr-2 h-4 w-4" />
-                  Settings
+                  {t.userMenu.settings}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -212,7 +214,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer"
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                Sign out
+                {t.userMenu.signOut}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -238,7 +240,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <div className="hidden md:block" />
 
           {/* Right controls */}
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="flex items-center gap-1 ml-auto">
+            <LanguageSwitcher />
             <ThemeToggle />
 
             {/* User avatar — desktop redundant with sidebar but kept for mobile */}
@@ -257,19 +260,21 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-52" align="end">
-                  <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col gap-0.5">
-                      <p className="text-sm font-semibold">
-                        {user?.user_metadata?.full_name || "User"}
-                      </p>
-                      <p className="text-xs text-muted-foreground">{user?.email}</p>
-                    </div>
-                  </DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col gap-0.5">
+                        <p className="text-sm font-semibold">
+                          {user?.user_metadata?.full_name || "User"}
+                        </p>
+                        <p className="text-xs text-muted-foreground">{user?.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                  </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild className="cursor-pointer">
                     <Link href="/dashboard/settings">
                       <Settings className="mr-2 h-4 w-4" />
-                      Settings
+                      {t.userMenu.settings}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -278,7 +283,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
-                    Sign out
+                    {t.userMenu.signOut}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
