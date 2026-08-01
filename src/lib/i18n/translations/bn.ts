@@ -1,112 +1,118 @@
 import type { Translations } from "./en"
 
 const bn: Translations = {
-  nav: {
-    signIn: "সাইন ইন",
-    getStarted: "শুরু করুন",
-  },
-
+  nav: { signIn: "সাইন ইন", getStarted: "শুরু করুন" },
   landing: {
     badge: "আরও ভালো সফটওয়্যার দ্রুত পাঠান।",
     hero: "আপনার সফটওয়্যারের চূড়ান্ত নিয়ন্ত্রণ কেন্দ্র",
-    heroSub:
-      "FeatureFlow প্রকল্প, ফিচার, স্প্রিন্ট বোর্ড, রিলিজ এবং বাগ ট্র্যাকিং একটি সুন্দর, দ্রুত প্ল্যাটফর্মে একত্রিত করে।",
-    startFree: "বিনামূল্যে শুরু করুন",
-    signIn: "সাইন ইন",
-
+    heroSub: "FeatureFlow প্রকল্প, ফিচার, স্প্রিন্ট বোর্ড, রিলিজ এবং বাগ ট্র্যাকিং একটি সুন্দর, দ্রুত প্ল্যাটফর্মে একত্রিত করে।",
+    startFree: "বিনামূল্যে শুরু করুন", signIn: "সাইন ইন",
     featuresHeading: "তৈরি করতে আপনার প্রয়োজনীয় সব কিছু",
     featuresSub: "আপনার সম্পূর্ণ টুলচেইন একটি সুশৃঙ্খল সমাধান দিয়ে প্রতিস্থাপন করুন।",
-
-    feature1Title: "প্রজেক্ট স্পেস",
-    feature1Desc:
-      "বিচ্ছিন্ন প্রজেক্ট ওয়ার্কস্পেস এবং রিয়েল-টাইম মেট্রিক্স দিয়ে আপনার সম্পূর্ণ পোর্টফোলিও সংগঠিত করুন।",
-    feature2Title: "স্প্রিন্ট বোর্ড",
-    feature2Desc:
-      "অত্যন্ত প্রতিক্রিয়াশীল চটপটে স্প্রিন্ট বোর্ডে আপনার ফিচারগুলি টেনে রাখুন এবং ছেড়ে দিন।",
-    feature3Title: "রিলিজ নিয়ন্ত্রণ",
-    feature3Desc:
-      "সমন্বিত রিলিজ ম্যানেজমেন্ট দিয়ে আপনার সফটওয়্যার সংস্করণগুলি পরিকল্পনা, ট্র্যাক এবং ডিপ্লয় করুন।",
-    feature4Title: "বাগ ট্র্যাকিং",
-    feature4Desc:
-      "আপনার ফিচার এবং রিলিজের সাথে সরাসরি যুক্ত বাগগুলি ক্যাপচার, অগ্রাধিকার এবং ঠিক করুন।",
-
+    feature1Title: "প্রজেক্ট স্পেস", feature1Desc: "বিচ্ছিন্ন প্রজেক্ট ওয়ার্কস্পেস দিয়ে আপনার পোর্টফোলিও সংগঠিত করুন।",
+    feature2Title: "স্প্রিন্ট বোর্ড", feature2Desc: "চটপটে স্প্রিন্ট বোর্ডে আপনার ফিচারগুলি টেনে রাখুন।",
+    feature3Title: "রিলিজ নিয়ন্ত্রণ", feature3Desc: "সমন্বিত রিলিজ ম্যানেজমেন্ট দিয়ে আপনার সফটওয়্যার সংস্করণ ডিপ্লয় করুন।",
+    feature4Title: "বাগ ট্র্যাকিং", feature4Desc: "আপনার ফিচার এবং রিলিজের সাথে সরাসরি যুক্ত বাগগুলি ঠিক করুন।",
     securityHeading: "এন্টারপ্রাইজ-গ্রেড আইসোলেশন",
-    securityDesc:
-      "PostgreSQL এবং নেটিভ Row-Level Security এর উপর নির্মিত। আপনার প্রতিটি ডেটা গাণিতিকভাবে বিচ্ছিন্ন এবং সুরক্ষিত।",
+    securityDesc: "PostgreSQL এবং নেটিভ Row-Level Security এর উপর নির্মিত।",
     createWorkspace: "আপনার ওয়ার্কস্পেস তৈরি করুন",
-
     footerTagline: "আধুনিক সফটওয়্যার টিমের জন্য তৈরি।",
   },
-
   sidebar: {
-    workspace: "ওয়ার্কস্পেস",
-    featureFlags: "ফিচার ফ্ল্যাগ",
-    settings: "সেটিংস",
-
-    dashboard: "ড্যাশবোর্ড",
-    projects: "প্রজেক্ট",
-    features: "ফিচার",
-    releases: "রিলিজ",
-    bugs: "বাগ",
-    sprintBoard: "স্প্রিন্ট বোর্ড",
-    groups: "গ্রুপ",
-    auditLogs: "অডিট লগ",
-    sdkDocs: "SDK ডকস",
+    workspace: "ওয়ার্কস্পেস", featureFlags: "ফিচার ফ্ল্যাগ", settings: "সেটিংস",
+    dashboard: "ড্যাশবোর্ড", projects: "প্রজেক্ট", features: "ফিচার",
+    releases: "রিলিজ", bugs: "বাগ", sprintBoard: "স্প্রিন্ট বোর্ড",
+    groups: "গ্রুপ", auditLogs: "অডিট লগ", sdkDocs: "SDK ডকস",
   },
-
-  userMenu: {
-    settings: "সেটিংস",
-    signOut: "সাইন আউট",
-  },
-
+  userMenu: { settings: "সেটিংস", signOut: "সাইন আউট" },
   dashboard: {
-    title: "ড্যাশবোর্ড",
-    subtitle: "FeatureFlow-এ স্বাগতম। এখানে আপনার ওয়ার্কস্পেসের একটি সংক্ষিপ্ত বিবরণ দেওয়া হলো।",
-
-    totalProjects: "মোট প্রজেক্ট",
-    activeFeatures: "সক্রিয় ফিচার",
-    plannedReleases: "পরিকল্পিত রিলিজ",
-    openBugs: "খোলা বাগ",
-
-    recentBugs: "সাম্প্রতিক বাগ",
-    noBugs: "এখন কোনো সক্রিয় বাগ নেই!",
-    upcomingReleases: "আসন্ন রিলিজ",
-    noReleases: "কোনো আসন্ন রিলিজ নির্ধারিত নেই।",
+    title: "ড্যাশবোর্ড", subtitle: "FeatureFlow-এ স্বাগতম।",
+    totalProjects: "মোট প্রজেক্ট", activeFeatures: "সক্রিয় ফিচার",
+    plannedReleases: "পরিকল্পিত রিলিজ", openBugs: "খোলা বাগ",
+    recentBugs: "সাম্প্রতিক বাগ", noBugs: "এখন কোনো সক্রিয় বাগ নেই!",
+    upcomingReleases: "আসন্ন রিলিজ", noReleases: "কোনো আসন্ন রিলিজ নির্ধারিত নেই।",
   },
-
   settings: {
-    title: "সেটিংস",
-    subtitle: "আপনার অ্যাকাউন্ট সেটিংস এবং পছন্দ পরিচালনা করুন।",
-
-    appearance: "উপস্থিতি",
-    appearanceDesc: "অ্যাপ্লিকেশনের লুক এবং ফিল কাস্টমাইজ করুন।",
-    theme: "থিম",
-    themeDesc: "লাইট এবং ডার্ক মোডের মধ্যে স্যুইচ করুন।",
-
-    language: "ভাষা",
-    languageDesc: "আপনার পছন্দের ভাষা বেছে নিন।",
-    selectLanguage: "ভাষা নির্বাচন করুন",
-    languageSaved: "ভাষা সফলভাবে আপডেট হয়েছে",
-
-    profile: "প্রোফাইল তথ্য",
-    profileDesc: "আপনার ডিসপ্লে নাম আপডেট করুন। পরিবর্তনগুলি তাৎক্ষণিকভাবে সংরক্ষিত হয়।",
-    fullName: "পুরো নাম",
-    namePlaceholder: "আপনার ডিসপ্লে নাম",
-    emailAddress: "ইমেইল ঠিকানা",
-    emailNote: "ইমেইল এখানে পরিবর্তন করা যাবে না। আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।",
-    saveChanges: "পরিবর্তন সংরক্ষণ করুন",
-    saving: "সংরক্ষণ হচ্ছে…",
+    title: "সেটিংস", subtitle: "আপনার অ্যাকাউন্ট সেটিংস পরিচালনা করুন।",
+    appearance: "উপস্থিতি", appearanceDesc: "অ্যাপ্লিকেশনের লুক কাস্টমাইজ করুন।",
+    theme: "থিম", themeDesc: "লাইট এবং ডার্ক মোডের মধ্যে স্যুইচ করুন।",
+    language: "ভাষা", languageDesc: "আপনার পছন্দের ভাষা বেছে নিন।",
+    selectLanguage: "ভাষা নির্বাচন করুন", languageSaved: "ভাষা সফলভাবে আপডেট হয়েছে",
+    profile: "প্রোফাইল তথ্য", profileDesc: "আপনার ডিসপ্লে নাম আপডেট করুন।",
+    fullName: "পুরো নাম", namePlaceholder: "আপনার ডিসপ্লে নাম",
+    emailAddress: "ইমেইল ঠিকানা", emailNote: "ইমেইল এখানে পরিবর্তন করা যাবে না।",
+    saveChanges: "পরিবর্তন সংরক্ষণ করুন", saving: "সংরক্ষণ হচ্ছে…",
     profileSaved: "প্রোফাইল সফলভাবে আপডেট হয়েছে",
-
-    security: "অ্যাকাউন্ট নিরাপত্তা",
-    securityDesc: "আপনার অ্যাকাউন্ট Supabase Auth দ্বারা সুরক্ষিত।",
-    authProvider: "প্রমাণীকরণ প্রদানকারী",
-    authProviderValue: "Supabase Auth এর মাধ্যমে ইমেইল ও পাসওয়ার্ড",
+    security: "অ্যাকাউন্ট নিরাপত্তা", securityDesc: "আপনার অ্যাকাউন্ট Supabase Auth দ্বারা সুরক্ষিত।",
+    authProvider: "প্রমাণীকরণ প্রদানকারী", authProviderValue: "Supabase Auth এর মাধ্যমে ইমেইল ও পাসওয়ার্ড",
     active: "সক্রিয়",
   },
-
-  languageSwitcher: {
-    label: "ভাষা",
+  languageSwitcher: { label: "ভাষা" },
+  projects: {
+    title: "প্রজেক্ট", subtitle: "আপনার ওয়ার্কস্পেস এবং পণ্য পরিচালনা করুন।",
+    newProject: "নতুন প্রজেক্ট", allProjects: "সমস্ত প্রজেক্ট",
+    allProjectsDesc: "আপনার অ্যাক্সেসযোগ্য সমস্ত প্রজেক্টের তালিকা।",
+    noProjects: "কোনো প্রজেক্ট পাওয়া যায়নি।",
+    colCode: "কোড", colName: "নাম", colStatus: "অবস্থা",
+    colOwner: "মালিক", colCreatedAt: "তৈরির তারিখ", unknown: "অজানা",
+  },
+  features: {
+    title: "ফিচার", subtitle: "প্রজেক্ট জুড়ে ফিচার পরিচালনা করুন।",
+    newFeature: "নতুন ফিচার", allFeatures: "সমস্ত ফিচার",
+    allFeaturesDesc: "সমস্ত প্রজেক্টের ফিচারের তালিকা।",
+    noFeatures: "কোনো ফিচার পাওয়া যায়নি।",
+    colProject: "প্রজেক্ট", colTitle: "শিরোনাম", colStatus: "অবস্থা",
+    colPriority: "অগ্রাধিকার", colAssignee: "অ্যাসাইনি", unassigned: "অ্যাসাইন করা হয়নি",
+  },
+  releases: {
+    title: "রিলিজ", subtitle: "আপনার পণ্য রিলিজ পরিচালনা করুন।",
+    newRelease: "নতুন রিলিজ", allReleases: "সমস্ত রিলিজ",
+    noReleases: "কোনো রিলিজ পাওয়া যায়নি।",
+    colProject: "প্রজেক্ট", colVersion: "সংস্করণ", colName: "নাম", colStatus: "অবস্থা", colType: "ধরন",
+  },
+  bugs: {
+    title: "বাগ", subtitle: "প্রজেক্ট জুড়ে সমস্যা ট্র্যাক করুন।",
+    reportBug: "বাগ রিপোর্ট করুন", allBugs: "সমস্ত বাগ",
+    noBugs: "কোনো বাগ পাওয়া যায়নি।",
+    colProject: "প্রজেক্ট", colTitle: "শিরোনাম", colStatus: "অবস্থা",
+    colSeverity: "তীব্রতা", colReporter: "রিপোর্টার", unknown: "অজানা",
+  },
+  sprint: {
+    title: "স্প্রিন্ট বোর্ড", subtitle: "অবস্থা অনুযায়ী সমস্ত ফিচারের কানবান দৃশ্য।",
+    colBacklog: "ব্যাকলগ", colPlanned: "পরিকল্পিত", colInProgress: "চলমান",
+    colReview: "পর্যালোচনা", colTesting: "পরীক্ষা", colReady: "প্রস্তুত", colReleased: "মুক্তিপ্রাপ্ত",
+    unassigned: "অ্যাসাইন করা হয়নি",
+  },
+  auditLogs: {
+    title: "অডিট লগ", subtitle: "সমস্ত ফ্ল্যাগ ও কনফিগারেশন পরিবর্তনের সম্পূর্ণ ইতিহাস।",
+    totalEvents: "মোট ঘটনা", created: "তৈরি হয়েছে", deleted: "মুছে গেছে",
+    searchPlaceholder: "অ্যাকশন, ব্যবহারকারী বা ফ্ল্যাগ কী দিয়ে খুঁজুন…",
+    refresh: "রিফ্রেশ", noLogsFound: "কোনো অডিট লগ পাওয়া যায়নি",
+    noLogsDesc: "ফ্ল্যাগ ও কনফিগারেশনের পরিবর্তন এখানে দেখাবে।",
+    colAction: "অ্যাকশন", colFlag: "ফ্ল্যাগ", colPerformedBy: "সম্পাদিত", colTimestamp: "সময়",
+    detailTitle: "অডিট লগ বিস্তারিত",
+    labelAction: "অ্যাকশন", labelPerformedBy: "সম্পাদিত", labelFlag: "ফ্ল্যাগ",
+    labelTimestamp: "সময়", labelOldValue: "পুরনো মান", labelNewValue: "নতুন মান", justNow: "এইমাত্র",
+  },
+  groups: {
+    title: "গ্রুপ", subtitle: "লক্ষ্যভিত্তিক ফিচার ফ্ল্যাগ রোলআউটের জন্য ব্যবহারকারী গ্রুপ পরিচালনা করুন।",
+    newGroup: "নতুন গ্রুপ", totalGroups: "মোট গ্রুপ", totalMembers: "মোট সদস্য",
+    searchPlaceholder: "নাম বা বিবরণ দিয়ে গ্রুপ খুঁজুন…",
+    refresh: "রিফ্রেশ", noGroupsSearch: "আপনার খোঁজে কোনো গ্রুপ মিলছে না",
+    noGroupsYet: "এখনো কোনো গ্রুপ নেই", noGroupsSearchHint: "অন্য কীওয়ার্ড চেষ্টা করুন।",
+    noGroupsHint: "গ্রুপ সদস্যপদ অনুযায়ী ব্যবহারকারীদের লক্ষ্য করতে গ্রুপ তৈরি করুন।",
+    createFirstGroup: "প্রথম গ্রুপ তৈরি করুন",
+    member: "সদস্য", members: "সদস্য", more: "আরো",
+    createTitle: "নতুন গ্রুপ তৈরি করুন", editTitle: "গ্রুপ সম্পাদনা করুন",
+    labelGroupName: "গ্রুপের নাম", labelDescription: "বিবরণ", labelMemberIds: "সদস্য IDs",
+    placeholderName: "যেমন. beta-users", placeholderDescription: "ঐচ্ছিক বিবরণ",
+    placeholderMembers: "কমা দিয়ে আলাদা ব্যবহারকারী IDs",
+    memberIdsHint: "কমা দিয়ে আলাদা করে সদস্যের ব্যবহারকারী IDs দিন।",
+    cancel: "বাতিল", creating: "তৈরি হচ্ছে…", createGroup: "গ্রুপ তৈরি করুন",
+    saving: "সংরক্ষণ হচ্ছে…", saveChanges: "পরিবর্তন সংরক্ষণ করুন",
+    deleteTitle: "মুছুন", deleteDesc: "এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।",
+    deleteGroup: "গ্রুপ মুছুন", groupCreated: "তৈরি হয়েছে",
+    groupUpdated: "গ্রুপ সফলভাবে আপডেট হয়েছে", groupDeleted: "মুছে গেছে",
   },
 }
 

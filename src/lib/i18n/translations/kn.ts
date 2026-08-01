@@ -1,112 +1,116 @@
 import type { Translations } from "./en"
 
 const kn: Translations = {
-  nav: {
-    signIn: "ಸೈನ್ ಇನ್",
-    getStarted: "ಪ್ರಾರಂಭಿಸಿ",
-  },
-
+  nav: { signIn: "ಸೈನ್ ಇನ್", getStarted: "ಪ್ರಾರಂಭಿಸಿ" },
   landing: {
-    badge: "ಉತ್ತಮ ಸಾಫ್ಟ್‌ವೇರ್ ಅನ್ನು ವೇಗವಾಗಿ ಕಳುಹಿಸಿ.",
-    hero: "ನಿಮ್ಮ ಸಾಫ್ಟ್‌ವೇರ್‌ಗಾಗಿ ಅಂತಿಮ ನಿಯಂತ್ರಣ ಕೇಂದ್ರ",
-    heroSub:
-      "FeatureFlow ಯೋಜನೆಗಳು, ವೈಶಿಷ್ಟ್ಯಗಳು, ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್‌ಗಳು, ಬಿಡುಗಡೆಗಳು ಮತ್ತು ಬಗ್ ಟ್ರ್ಯಾಕಿಂಗ್ ಅನ್ನು ಒಂದು ಸುಂದರ, ವೇಗದ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್‌ನಲ್ಲಿ ಒಟ್ಟುಗೂಡಿಸುತ್ತದೆ.",
-    startFree: "ಉಚಿತವಾಗಿ ಪ್ರಾರಂಭಿಸಿ",
-    signIn: "ಸೈನ್ ಇನ್",
-
-    featuresHeading: "ನಿರ್ಮಿಸಲು ನಿಮಗೆ ಬೇಕಾದ ಎಲ್ಲವೂ",
-    featuresSub: "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಟೂಲ್‌ಚೈನ್ ಅನ್ನು ಒಂದು ಸೊಗಸಾದ ಪರಿಹಾರದೊಂದಿಗೆ ಬದಲಿಸಿ.",
-
-    feature1Title: "ಪ್ರಾಜೆಕ್ಟ್ ಸ್ಪೇಸ್‌ಗಳು",
-    feature1Desc:
-      "ಪ್ರತ್ಯೇಕ ಪ್ರಾಜೆಕ್ಟ್ ವರ್ಕ್‌ಸ್ಪೇಸ್‌ಗಳು ಮತ್ತು ರಿಯಲ್-ಟೈಮ್ ಮೆಟ್ರಿಕ್ಸ್‌ನೊಂದಿಗೆ ನಿಮ್ಮ ಪೋರ್ಟ್‌ಫೋಲಿಯೋ ಅನ್ನು ಸಂಘಟಿಸಿ.",
-    feature2Title: "ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್‌ಗಳು",
-    feature2Desc:
-      "ಅತ್ಯಂತ ಪ್ರತಿಕ್ರಿಯಾತ್ಮಕ ಅಜೈಲ್ ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್‌ಗಳಲ್ಲಿ ನಿಮ್ಮ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಡ್ರ್ಯಾಗ್ ಮತ್ತು ಡ್ರಾಪ್ ಮಾಡಿ.",
-    feature3Title: "ಬಿಡುಗಡೆ ನಿಯಂತ್ರಣ",
-    feature3Desc:
-      "ಸಮಗ್ರ ಬಿಡುಗಡೆ ನಿರ್ವಹಣೆಯೊಂದಿಗೆ ನಿಮ್ಮ ಸಾಫ್ಟ್‌ವೇರ್ ಆವೃತ್ತಿಗಳನ್ನು ಯೋಜಿಸಿ, ಟ್ರ್ಯಾಕ್ ಮಾಡಿ ಮತ್ತು ಡಿಪ್ಲಾಯ್ ಮಾಡಿ.",
-    feature4Title: "ಬಗ್ ಟ್ರ್ಯಾಕಿಂಗ್",
-    feature4Desc:
-      "ನಿಮ್ಮ ವೈಶಿಷ್ಟ್ಯಗಳು ಮತ್ತು ಬಿಡುಗಡೆಗಳಿಗೆ ನೇರವಾಗಿ ಸಂಪರ್ಕಿತ ಬಗ್‌ಗಳನ್ನು ಸೆರೆಹಿಡಿದು, ಆದ್ಯತೆ ನೀಡಿ ಮತ್ತು ಸರಿಪಡಿಸಿ.",
-
-    securityHeading: "ಎಂಟರ್‌ಪ್ರೈಸ್-ಗ್ರೇಡ್ ಐಸೋಲೇಶನ್",
-    securityDesc:
-      "PostgreSQL ಮತ್ತು ನೇಟಿವ್ Row-Level Security ಮೇಲೆ ನಿರ್ಮಿಸಲಾಗಿದೆ. ನಿಮ್ಮ ಪ್ರತಿ ಡೇಟಾ ಗಣಿತೀಯವಾಗಿ ಪ್ರತ್ಯೇಕ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿದೆ.",
+    badge: "ಉತ್ತಮ ಸಾಫ್ಟ್‌ವೇರ್ ಅನ್ನು ವೇಗವಾಗಿ ತಲುಪಿಸಿ.", hero: "ನಿಮ್ಮ ಸಾಫ್ಟ್‌ವೇರ್‌ಗೆ ಅಂತಿಮ ನಿಯಂತ್ರಣ ಕೇಂದ್ರ",
+    heroSub: "FeatureFlow ಯೋಜನೆಗಳು, ವೈಶಿಷ್ಟ್ಯಗಳು, ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್‌ಗಳು, ಬಿಡುಗಡೆಗಳು ಮತ್ತು ಬಗ್ ಟ್ರ್ಯಾಕಿಂಗ್ ಅನ್ನು ಸುಂದರವಾದ, ವೇಗದ ವೇದಿಕೆಯಲ್ಲಿ ತರುತ್ತದೆ.",
+    startFree: "ಉಚಿತವಾಗಿ ಪ್ರಾರಂಭಿಸಿ", signIn: "ಸೈನ್ ಇನ್",
+    featuresHeading: "ನಿರ್ಮಿಸಲು ನಿಮಗೆ ಬೇಕಾಗಿರುವುದು", featuresSub: "ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಟೂಲ್‌ಚೈನ್ ಅನ್ನು ಒಂದು ಪರಿಹಾರದೊಂದಿಗೆ ಬದಲಾಯಿಸಿ.",
+    feature1Title: "ಪ್ರಾಜೆಕ್ಟ್ ಜಾಗಗಳು", feature1Desc: "ಪ್ರತ್ಯೇಕ ಪ್ರಾಜೆಕ್ಟ್ ವರ್ಕ್‌ಸ್ಪೇಸ್‌ಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಪೋರ್ಟ್‌ಫೋಲಿಯೊವನ್ನು ಆಯೋಜಿಸಿ.",
+    feature2Title: "ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್‌ಗಳು", feature2Desc: "ವೇಗವಾದ ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್‌ಗಳಲ್ಲಿ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ.",
+    feature3Title: "ಬಿಡುಗಡೆ ನಿಯಂತ್ರಣ", feature3Desc: "ಸಾಫ್ಟ್‌ವೇರ್ ಆವೃತ್ತಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    feature4Title: "ಬಗ್ ಟ್ರ್ಯಾಕಿಂಗ್", feature4Desc: "ವೈಶಿಷ್ಟ್ಯಗಳಿಗೆ ಸಂಪರ್ಕಗೊಂಡಿರುವ ಬಗ್‌ಗಳನ್ನು ಸರಿಪಡಿಸಿ.",
+    securityHeading: "ಎಂಟರ್‌ಪ್ರೈಸ್-ದರ್ಜೆಯ ಐಸೊಲೇಶನ್",
+    securityDesc: "PostgreSQL ಮತ್ತು Row-Level Security ಮೇಲೆ ನಿರ್ಮಿಸಲಾಗಿದೆ.",
     createWorkspace: "ನಿಮ್ಮ ವರ್ಕ್‌ಸ್ಪೇಸ್ ರಚಿಸಿ",
-
-    footerTagline: "ಆಧುನಿಕ ಸಾಫ್ಟ್‌ವೇರ್ ತಂಡಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.",
+    footerTagline: "ಆಧುನಿಕ ತಂಡಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ.",
   },
-
   sidebar: {
-    workspace: "ವರ್ಕ್‌ಸ್ಪೇಸ್",
-    featureFlags: "ವೈಶಿಷ್ಟ್ಯ ಧ್ವಜಗಳು",
-    settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
-
-    dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
-    projects: "ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು",
-    features: "ವೈಶಿಷ್ಟ್ಯಗಳು",
-    releases: "ಬಿಡುಗಡೆಗಳು",
-    bugs: "ಬಗ್‌ಗಳು",
-    sprintBoard: "ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್",
-    groups: "ಗುಂಪುಗಳು",
-    auditLogs: "ಆಡಿಟ್ ಲಾಗ್‌ಗಳು",
-    sdkDocs: "SDK ಡಾಕ್ಸ್",
+    workspace: "ವರ್ಕ್‌ಸ್ಪೇಸ್", featureFlags: "ಫೀಚರ್ ಫ್ಲ್ಯಾಗ್‌ಗಳು", settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", projects: "ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು", features: "ವೈಶಿಷ್ಟ್ಯಗಳು",
+    releases: "ಬಿಡುಗಡೆಗಳು", bugs: "ಬಗ್‌ಗಳು", sprintBoard: "ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್",
+    groups: "ಗುಂಪುಗಳು", auditLogs: "ಆಡಿಟ್ ಲಾಗ್‌ಗಳು", sdkDocs: "SDK ಡಾಕ್ಸ್",
   },
-
-  userMenu: {
-    settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
-    signOut: "ಸೈನ್ ಔಟ್",
-  },
-
+  userMenu: { settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", signOut: "ಸೈನ್ ಔಟ್" },
   dashboard: {
-    title: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
-    subtitle: "FeatureFlow ಗೆ ಸ್ವಾಗತ. ನಿಮ್ಮ ವರ್ಕ್‌ಸ್ಪೇಸ್‌ನ ಅವಲೋಕನ ಇಲ್ಲಿದೆ.",
-
-    totalProjects: "ಒಟ್ಟು ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು",
-    activeFeatures: "ಸಕ್ರಿಯ ವೈಶಿಷ್ಟ್ಯಗಳು",
-    plannedReleases: "ಯೋಜಿತ ಬಿಡುಗಡೆಗಳು",
-    openBugs: "ತೆರೆದ ಬಗ್‌ಗಳು",
-
-    recentBugs: "ಇತ್ತೀಚಿನ ಬಗ್‌ಗಳು",
-    noBugs: "ಈಗ ಯಾವುದೇ ಸಕ್ರಿಯ ಬಗ್‌ಗಳಿಲ್ಲ!",
-    upcomingReleases: "ಮುಂಬರುವ ಬಿಡುಗಡೆಗಳು",
-    noReleases: "ಯಾವುದೇ ಮುಂಬರುವ ಬಿಡುಗಡೆಗಳು ನಿಗದಿಪಡಿಸಿಲ್ಲ.",
+    title: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", subtitle: "FeatureFlow ಗೆ ಸುಸ್ವಾಗತ.",
+    totalProjects: "ಒಟ್ಟು ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು", activeFeatures: "ಸಕ್ರಿಯ ವೈಶಿಷ್ಟ್ಯಗಳು",
+    plannedReleases: "ಯೋಜಿತ ಬಿಡುಗಡೆಗಳು", openBugs: "ತೆರೆದ ಬಗ್‌ಗಳು",
+    recentBugs: "ಇತ್ತೀಚಿನ ಬಗ್‌ಗಳು", noBugs: "ಯಾವುದೇ ಸಕ್ರಿಯ ಬಗ್‌ಗಳಿಲ್ಲ!",
+    upcomingReleases: "ಮುಂಬರುವ ಬಿಡುಗಡೆಗಳು", noReleases: "ಯಾವುದೇ ಮುಂಬರುವ ಬಿಡುಗಡೆಗಳಿಲ್ಲ.",
   },
-
   settings: {
-    title: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
-    subtitle: "ನಿಮ್ಮ ಖಾತೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಆದ್ಯತೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
-
-    appearance: "ನೋಟ",
-    appearanceDesc: "ಅಪ್ಲಿಕೇಶನ್‌ನ ನೋಟ ಮತ್ತು ಅನುಭವವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ.",
-    theme: "ಥೀಮ್",
-    themeDesc: "ಲೈಟ್ ಮತ್ತು ಡಾರ್ಕ್ ಮೋಡ್ ನಡುವೆ ಬದಲಿಸಿ.",
-
-    language: "ಭಾಷೆ",
-    languageDesc: "ನಿಮ್ಮ ಆದ್ಯತೆಯ ಭಾಷೆ ಆಯ್ಕೆ ಮಾಡಿ.",
-    selectLanguage: "ಭಾಷೆ ಆಯ್ಕೆ ಮಾಡಿ",
-    languageSaved: "ಭಾಷೆ ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
-
-    profile: "ಪ್ರೊಫೈಲ್ ಮಾಹಿತಿ",
-    profileDesc: "ನಿಮ್ಮ ಡಿಸ್ಪ್ಲೇ ಹೆಸರನ್ನು ನವೀಕರಿಸಿ. ಬದಲಾವಣೆಗಳು ತಕ್ಷಣ ಉಳಿಸಲಾಗುತ್ತದೆ.",
-    fullName: "ಪೂರ್ಣ ಹೆಸರು",
-    namePlaceholder: "ನಿಮ್ಮ ಡಿಸ್ಪ್ಲೇ ಹೆಸರು",
-    emailAddress: "ಇಮೇಲ್ ವಿಳಾಸ",
-    emailNote: "ಇಮೇಲ್ ಇಲ್ಲಿ ಬದಲಾಯಿಸಲಾಗದು. ನಿಮ್ಮ ಅಡ್ಮಿನ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ.",
-    saveChanges: "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ",
-    saving: "ಉಳಿಸಲಾಗುತ್ತಿದೆ…",
-    profileSaved: "ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
-
-    security: "ಖಾತೆ ಭದ್ರತೆ",
-    securityDesc: "ನಿಮ್ಮ ಖಾತೆ Supabase Auth ಮೂಲಕ ಸುರಕ್ಷಿತವಾಗಿದೆ.",
-    authProvider: "ದೃಢೀಕರಣ ಪೂರೈಕೆದಾರ",
-    authProviderValue: "Supabase Auth ಮೂಲಕ ಇಮೇಲ್ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್",
+    title: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", subtitle: "ನಿಮ್ಮ ಖಾತೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    appearance: "ಗೋಚರತೆ", appearanceDesc: "ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ.",
+    theme: "ಥೀಮ್", themeDesc: "ಲೈಟ್ ಮತ್ತು ಡಾರ್ಕ್ ಮೋಡ್ ನಡುವೆ ಬದಲಾಯಿಸಿ.",
+    language: "ಭಾಷೆ", languageDesc: "ನಿಮ್ಮ ನೆಚ್ಚಿನ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+    selectLanguage: "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ", languageSaved: "ಭಾಷೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
+    profile: "ಪ್ರೊಫೈಲ್", profileDesc: "ಡಿಸ್ಪ್ಲೇ ಹೆಸರನ್ನು ನವೀಕರಿಸಿ.",
+    fullName: "ಪೂರ್ಣ ಹೆಸರು", namePlaceholder: "ಡಿಸ್ಪ್ಲೇ ಹೆಸರು",
+    emailAddress: "ಇಮೇಲ್", emailNote: "ಇಮೇಲ್ ಅನ್ನು ಇಲ್ಲಿ ಬದಲಾಯಿಸಲಾಗುವುದಿಲ್ಲ.",
+    saveChanges: "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ", saving: "ಉಳಿಸಲಾಗುತ್ತಿದೆ…",
+    profileSaved: "ಪ್ರೊಫೈಲ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
+    security: "ಖಾತೆ ಭದ್ರತೆ", securityDesc: "Supabase Auth ನಿಂದ ರಕ್ಷಿಸಲಾಗಿದೆ.",
+    authProvider: "ದೃಢೀಕರಣ", authProviderValue: "Supabase Auth ಮೂಲಕ ಇಮೇಲ್ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್",
     active: "ಸಕ್ರಿಯ",
   },
-
-  languageSwitcher: {
-    label: "ಭಾಷೆ",
+  languageSwitcher: { label: "ಭಾಷೆ" },
+  projects: {
+    title: "ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು", subtitle: "ವರ್ಕ್‌ಸ್ಪೇಸ್ ಮತ್ತು ಉತ್ಪನ್ನಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    newProject: "ಹೊಸ ಪ್ರಾಜೆಕ್ಟ್", allProjects: "ಎಲ್ಲಾ ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು",
+    allProjectsDesc: "ಎಲ್ಲಾ ಪ್ರಾಜೆಕ್ಟ್‌ಗಳ ಪಟ್ಟಿ.",
+    noProjects: "ಯಾವುದೇ ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    colCode: "ಕೋಡ್", colName: "ಹೆಸರು", colStatus: "ಸ್ಥಿತಿ",
+    colOwner: "ಮಾಲೀಕ", colCreatedAt: "ರಚಿಸಲಾಗಿದೆ", unknown: "ಗೊತ್ತಿಲ್ಲ",
+  },
+  features: {
+    title: "ವೈಶಿಷ್ಟ್ಯಗಳು", subtitle: "ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    newFeature: "ಹೊಸ ವೈಶಿಷ್ಟ್ಯ", allFeatures: "ಎಲ್ಲಾ ವೈಶಿಷ್ಟ್ಯಗಳು",
+    allFeaturesDesc: "ವೈಶಿಷ್ಟ್ಯಗಳ ಪಟ್ಟಿ.",
+    noFeatures: "ಯಾವುದೇ ವೈಶಿಷ್ಟ್ಯಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    colProject: "ಪ್ರಾಜೆಕ್ಟ್", colTitle: "ಶೀರ್ಷಿಕೆ", colStatus: "ಸ್ಥಿತಿ",
+    colPriority: "ಆದ್ಯತೆ", colAssignee: "ನಿಯೋಜಿತ", unassigned: "ನಿಯೋಜಿಸಿಲ್ಲ",
+  },
+  releases: {
+    title: "ಬಿಡುಗಡೆಗಳು", subtitle: "ಉತ್ಪನ್ನ ಬಿಡುಗಡೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    newRelease: "ಹೊಸ ಬಿಡುಗಡೆ", allReleases: "ಎಲ್ಲಾ ಬಿಡುಗಡೆಗಳು",
+    noReleases: "ಯಾವುದೇ ಬಿಡುಗಡೆಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    colProject: "ಪ್ರಾಜೆಕ್ಟ್", colVersion: "ಆವೃತ್ತಿ", colName: "ಹೆಸರು", colStatus: "ಸ್ಥಿತಿ", colType: "ಪ್ರಕಾರ",
+  },
+  bugs: {
+    title: "ಬಗ್‌ಗಳು", subtitle: "ಸಮಸ್ಯೆಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ.",
+    reportBug: "ಬಗ್ ವರದಿ ಮಾಡಿ", allBugs: "ಎಲ್ಲಾ ಬಗ್‌ಗಳು",
+    noBugs: "ಯಾವುದೇ ಬಗ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    colProject: "ಪ್ರಾಜೆಕ್ಟ್", colTitle: "ಶೀರ್ಷಿಕೆ", colStatus: "ಸ್ಥಿತಿ",
+    colSeverity: "ತೀವ್ರತೆ", colReporter: "ವರದಿಗಾರ", unknown: "ಗೊತ್ತಿಲ್ಲ",
+  },
+  sprint: {
+    title: "ಸ್ಪ್ರಿಂಟ್ ಬೋರ್ಡ್", subtitle: "ಸ್ಥಿತಿಯ ಮೂಲಕ ವೈಶಿಷ್ಟ್ಯಗಳ ಕಾನ್ಬಾನ್ ವೀಕ್ಷಣೆ.",
+    colBacklog: "ಬ್ಯಾಕ್‌ಲಾಗ್", colPlanned: "ಯೋಜಿಸಲಾಗಿದೆ", colInProgress: "ಪ್ರಗತಿಯಲ್ಲಿದೆ",
+    colReview: "ವಿಮರ್ಶೆ", colTesting: "ಪರೀಕ್ಷೆ", colReady: "ಸಿದ್ಧವಾಗಿದೆ", colReleased: "ಬಿಡುಗಡೆಯಾಗಿದೆ",
+    unassigned: "ನಿಯೋಜಿಸಿಲ್ಲ",
+  },
+  auditLogs: {
+    title: "ಆಡಿಟ್ ಲಾಗ್", subtitle: "ಫ್ಲ್ಯಾಗ್ ಬದಲಾವಣೆಗಳ ಇತಿಹಾಸ.",
+    totalEvents: "ಒಟ್ಟು ಘಟನೆಗಳು", created: "ರಚಿಸಲಾಗಿದೆ", deleted: "ಅಳಿಸಲಾಗಿದೆ",
+    searchPlaceholder: "ಕ್ರಿಯೆ, ಬಳಕೆದಾರ ಅಥವಾ ಫ್ಲ್ಯಾಗ್ ಕೀ ಮೂಲಕ ಹುಡುಕಿ…",
+    refresh: "ರಿಫ್ರೆಶ್", noLogsFound: "ಯಾವುದೇ ಆಡಿಟ್ ಲಾಗ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    noLogsDesc: "ಫ್ಲ್ಯಾಗ್ ಬದಲಾವಣೆಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ.",
+    colAction: "ಕ್ರಿಯೆ", colFlag: "ಫ್ಲ್ಯಾಗ್", colPerformedBy: "ಮಾಡಿದವರು", colTimestamp: "ಸಮಯ",
+    detailTitle: "ಆಡಿಟ್ ಲಾಗ್ ವಿವರ",
+    labelAction: "ಕ್ರಿಯೆ", labelPerformedBy: "ಮಾಡಿದವರು", labelFlag: "ಫ್ಲ್ಯಾಗ್",
+    labelTimestamp: "ಸಮయం", labelOldValue: "ಹಳೆಯ ಮೌಲ್ಯ", labelNewValue: "ಹೊಸ ಮೌಲ್ಯ", justNow: "ಈಗ",
+  },
+  groups: {
+    title: "ಗುಂಪುಗಳು", subtitle: "ಗುರಿ ಗುಂಪುಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    newGroup: "ಹೊಸ ಗುಂಪು", totalGroups: "ಒಟ್ಟು ಗುಂಪುಗಳು", totalMembers: "ಒಟ್ಟು ಸದಸ್ಯರು",
+    searchPlaceholder: "ಗುಂಪುಗಳನ್ನು ಹುಡುಕಿ…",
+    refresh: "ರಿಫ್ರೆಶ್", noGroupsSearch: "ಯಾವುದೇ ಗುಂಪುಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
+    noGroupsYet: "ಇನ್ನೂ ಗುಂಪುಗಳಿಲ್ಲ", noGroupsSearchHint: "ಬೇರೆ ಕೀವರ್ಡ್ ಪ್ರಯತ್ನಿಸಿ.",
+    noGroupsHint: "ಗುಂಪುಗಳನ್ನು ರಚಿಸಿ.",
+    createFirstGroup: "ಮೊದಲ ಗುಂಪನ್ನು ರಚಿಸಿ",
+    member: "ಸದಸ್ಯ", members: "ಸದಸ್ಯರು", more: "ಹೆಚ್ಚು",
+    createTitle: "ಹೊಸ ಗುಂಪನ್ನು ರಚಿಸಿ", editTitle: "ಗುಂಪನ್ನು ಸಂಪಾದಿಸಿ",
+    labelGroupName: "ಗುಂಪಿನ ಹೆಸರು", labelDescription: "ವಿವರಣೆ", labelMemberIds: "ಸದಸ್ಯರ ID ಗಳು",
+    placeholderName: "ಉದಾ. beta-users", placeholderDescription: "ಐಚ್ಛಿಕ ವಿವರಣೆ",
+    placeholderMembers: "ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಿದ ID ಗಳು",
+    memberIdsHint: "ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಡಿಸಿದ ID ಗಳನ್ನು ನಮೂದಿಸಿ.",
+    cancel: "ರದ್ದುಮಾಡಿ", creating: "ರಚಿಸಲಾಗುತ್ತಿದೆ…", createGroup: "ಗುಂಪನ್ನು ರಚಿಸಿ",
+    saving: "ಉಳಿಸಲಾಗುತ್ತಿದೆ…", saveChanges: "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ",
+    deleteTitle: "ಅಳಿಸಿ", deleteDesc: "ಈ ಕ್ರಿಯೆಯನ್ನು ಹಿಂತಿರುಗಿಸಲಾಗುವುದಿಲ್ಲ.",
+    deleteGroup: "ಗುಂಪನ್ನು ಅಳಿಸಿ", groupCreated: "ರಚಿಸಲಾಗಿದೆ",
+    groupUpdated: "ಗುಂಪನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ", groupDeleted: "ಅಳಿಸಲಾಗಿದೆ",
   },
 }
 

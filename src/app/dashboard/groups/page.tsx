@@ -34,6 +34,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner"
+import { useTranslation } from "@/lib/i18n/context"
 
 interface Group {
   id: string
@@ -51,6 +52,7 @@ interface GroupForm {
 }
 
 export default function GroupsPage() {
+  const { t } = useTranslation()
   const [groups, setGroups] = useState<Group[]>([])
   const [filtered, setFiltered] = useState<Group[]>([])
   const [loading, setLoading] = useState(true)
@@ -118,7 +120,7 @@ export default function GroupsPage() {
         }),
       })
       if (!res.ok) { const d = await res.json(); throw new Error(d.error) }
-      toast.success(`Group "${form.name}" created`)
+      toast.success(`Group "${form.name}" ${t.groups.groupCreated}`)
       setShowCreate(false)
       fetchGroups()
     } catch (e: unknown) {
@@ -142,7 +144,7 @@ export default function GroupsPage() {
         }),
       })
       if (!res.ok) { const d = await res.json(); throw new Error(d.error) }
-      toast.success("Group updated successfully")
+      toast.success(t.groups.groupUpdated)
       setEditGroup(null)
       fetchGroups()
     } catch (e: unknown) {
@@ -157,7 +159,7 @@ export default function GroupsPage() {
     try {
       const res = await fetch(`/api/groups/${deleteGroup.id}`, { method: "DELETE" })
       if (!res.ok) { const d = await res.json(); throw new Error(d.error) }
-      toast.success(`Group "${deleteGroup.name}" deleted`)
+      toast.success(`Group "${deleteGroup.name}" ${t.groups.groupDeleted}`)
       setDeleteGroup(null)
       fetchGroups()
     } catch (e: unknown) {
@@ -177,15 +179,15 @@ export default function GroupsPage() {
             <Users className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Groups</h1>
+            <h1 className="text-2xl font-bold tracking-tight">{t.groups.title}</h1>
             <p className="text-sm text-muted-foreground">
-              Manage user groups for targeted feature flag rollouts.
+              {t.groups.subtitle}
             </p>
           </div>
         </div>
         <Button id="create-group-btn" onClick={openCreate}>
           <Plus className="w-4 h-4 mr-2" />
-          New Group
+          {t.groups.newGroup}
         </Button>
       </div>
 
@@ -197,7 +199,7 @@ export default function GroupsPage() {
           </div>
           <div>
             <div className="text-2xl font-bold">{groups.length}</div>
-            <div className="text-xs text-muted-foreground">Total Groups</div>
+            <div className="text-xs text-muted-foreground">{t.groups.totalGroups}</div>
           </div>
         </div>
         <div className="border rounded-xl p-4 bg-card flex items-center gap-3">
@@ -208,7 +210,7 @@ export default function GroupsPage() {
             <div className="text-2xl font-bold">
               {groups.reduce((acc, g) => acc + (g.member_ids?.length ?? 0), 0)}
             </div>
-            <div className="text-xs text-muted-foreground">Total Members</div>
+            <div className="text-xs text-muted-foreground">{t.groups.totalMembers}</div>
           </div>
         </div>
       </div>
@@ -219,7 +221,7 @@ export default function GroupsPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             id="group-search"
-            placeholder="Search groups by name or description…"
+            placeholder={t.groups.searchPlaceholder}
             className="pl-9"
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -227,7 +229,7 @@ export default function GroupsPage() {
         </div>
         <Button variant="outline" size="sm" onClick={fetchGroups} disabled={loading} id="group-refresh-btn">
           <RefreshCw className={`w-4 h-4 mr-2 ${loading ? "animate-spin" : ""}`} />
-          Refresh
+          {t.groups.refresh}
         </Button>
       </div>
 
@@ -242,7 +244,7 @@ export default function GroupsPage() {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="border rounded-xl p-5 bg-card space-y-3 animate-pulse">
+             <div key={i} className="border rounded-xl p-5 bg-card space-y-3 animate-pulse">
               <div className="h-5 bg-muted rounded w-1/2" />
               <div className="h-4 bg-muted rounded w-3/4" />
               <div className="h-8 bg-muted rounded" />
@@ -253,15 +255,15 @@ export default function GroupsPage() {
         <div className="border rounded-xl p-16 text-center text-muted-foreground bg-card">
           <Users className="w-12 h-12 mx-auto mb-4 opacity-30" />
           <p className="font-medium text-lg">
-            {search ? "No groups match your search" : "No groups yet"}
+            {search ? t.groups.noGroupsSearch : t.groups.noGroupsYet}
           </p>
           <p className="text-sm mt-1">
-            {search ? "Try a different keyword." : "Create a group to start targeting users by group membership."}
+            {search ? t.groups.noGroupsSearchHint : t.groups.noGroupsHint}
           </p>
           {!search && (
             <Button className="mt-4" onClick={openCreate} id="empty-create-group-btn">
               <Plus className="w-4 h-4 mr-2" />
-              Create First Group
+              {t.groups.createFirstGroup}
             </Button>
           )}
         </div>
@@ -311,14 +313,10 @@ export default function GroupsPage() {
                 <Badge variant="secondary" className="text-xs">
                   <UserCheck className="w-3 h-3 mr-1" />
                   {group.member_ids?.length ?? 0}{" "}
-                  {(group.member_ids?.length ?? 0) === 1 ? "member" : "members"}
+                  {(group.member_ids?.length ?? 0) === 1 ? t.groups.member : t.groups.members}
                 </Badge>
                 <span className="text-xs text-muted-foreground">
-                  {new Date(group.created_at).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                  {new Date(group.created_at).toLocaleDateString()}
                 </span>
               </div>
 
@@ -334,7 +332,7 @@ export default function GroupsPage() {
                   ))}
                   {(group.member_ids ?? []).length > 3 && (
                     <span className="text-xs text-muted-foreground px-1.5 py-0.5">
-                      +{(group.member_ids ?? []).length - 3} more
+                      +{(group.member_ids ?? []).length - 3} {t.groups.more}
                     </span>
                   )}
                 </div>
@@ -348,53 +346,53 @@ export default function GroupsPage() {
       <Dialog open={showCreate} onOpenChange={open => { if (!open) setShowCreate(false) }}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Create New Group</DialogTitle>
+            <DialogTitle>{t.groups.createTitle}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label htmlFor="create-group-name">Group Name <span className="text-destructive">*</span></Label>
+              <Label htmlFor="create-group-name">{t.groups.labelGroupName} <span className="text-destructive">*</span></Label>
               <Input
                 id="create-group-name"
-                placeholder="e.g. beta-users, internal-team"
+                placeholder={t.groups.placeholderName}
                 value={form.name}
                 onChange={updateForm("name")}
                 autoFocus
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="create-group-description">Description</Label>
+              <Label htmlFor="create-group-description">{t.groups.labelDescription}</Label>
               <Textarea
                 id="create-group-description"
-                placeholder="Optional description of this group's purpose"
+                placeholder={t.groups.placeholderDescription}
                 rows={2}
                 value={form.description}
                 onChange={updateForm("description")}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="create-group-members">Member IDs</Label>
+              <Label htmlFor="create-group-members">{t.groups.labelMemberIds}</Label>
               <Textarea
                 id="create-group-members"
-                placeholder="Comma-separated user IDs, e.g. user_1, user_2, user_3"
+                placeholder={t.groups.placeholderMembers}
                 rows={3}
                 value={form.memberIds}
                 onChange={updateForm("memberIds")}
               />
               <p className="text-xs text-muted-foreground">
-                Enter the user IDs of members, separated by commas.
+                {t.groups.memberIdsHint}
               </p>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowCreate(false)}>
-              Cancel
+              {t.groups.cancel}
             </Button>
             <Button
               onClick={handleSubmitCreate}
               disabled={submitting || !form.name.trim()}
               id="confirm-create-group-btn"
             >
-              {submitting ? "Creating…" : "Create Group"}
+              {submitting ? t.groups.creating : t.groups.createGroup}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -404,52 +402,52 @@ export default function GroupsPage() {
       <Dialog open={!!editGroup} onOpenChange={open => { if (!open) setEditGroup(null) }}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Edit Group</DialogTitle>
+            <DialogTitle>{t.groups.editTitle}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label htmlFor="edit-group-name">Group Name <span className="text-destructive">*</span></Label>
+              <Label htmlFor="edit-group-name">{t.groups.labelGroupName} <span className="text-destructive">*</span></Label>
               <Input
                 id="edit-group-name"
-                placeholder="e.g. beta-users"
+                placeholder={t.groups.placeholderName}
                 value={form.name}
                 onChange={updateForm("name")}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="edit-group-description">Description</Label>
+              <Label htmlFor="edit-group-description">{t.groups.labelDescription}</Label>
               <Textarea
                 id="edit-group-description"
-                placeholder="Optional description"
+                placeholder={t.groups.placeholderDescription}
                 rows={2}
                 value={form.description}
                 onChange={updateForm("description")}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="edit-group-members">Member IDs</Label>
+              <Label htmlFor="edit-group-members">{t.groups.labelMemberIds}</Label>
               <Textarea
                 id="edit-group-members"
-                placeholder="Comma-separated user IDs"
+                placeholder={t.groups.placeholderMembers}
                 rows={3}
                 value={form.memberIds}
                 onChange={updateForm("memberIds")}
               />
               <p className="text-xs text-muted-foreground">
-                Enter the user IDs of members, separated by commas.
+                {t.groups.memberIdsHint}
               </p>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditGroup(null)}>
-              Cancel
+              {t.groups.cancel}
             </Button>
             <Button
               onClick={handleSubmitEdit}
               disabled={submitting || !form.name.trim()}
               id="confirm-edit-group-btn"
             >
-              {submitting ? "Saving…" : "Save Changes"}
+              {submitting ? t.groups.saving : t.groups.saveChanges}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -459,20 +457,19 @@ export default function GroupsPage() {
       <AlertDialog open={!!deleteGroup} onOpenChange={open => { if (!open) setDeleteGroup(null) }}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete &quot;{deleteGroup?.name}&quot;?</AlertDialogTitle>
+            <AlertDialogTitle>{t.groups.deleteTitle} &quot;{deleteGroup?.name}&quot;?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. Any feature flag targeting rules that reference this
-              group name will stop matching new requests.
+              {t.groups.deleteDesc}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t.groups.cancel}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               className="bg-destructive hover:bg-destructive/90"
               id="confirm-delete-group-btn"
             >
-              Delete Group
+              {t.groups.deleteGroup}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

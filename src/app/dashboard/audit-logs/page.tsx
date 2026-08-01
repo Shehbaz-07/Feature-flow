@@ -36,6 +36,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { useTranslation } from "@/lib/i18n/context"
 
 interface AuditLog {
   id: string
@@ -69,6 +70,7 @@ function getActionBadge(action: string) {
 }
 
 export default function AuditLogPage() {
+  const { t } = useTranslation()
   const [logs, setLogs] = useState<AuditLog[]>([])
   const [filtered, setFiltered] = useState<AuditLog[]>([])
   const [loading, setLoading] = useState(true)
@@ -126,7 +128,7 @@ export default function AuditLogPage() {
   const timeAgo = (ts: string) => {
     const diff = Date.now() - new Date(ts).getTime()
     const mins = Math.floor(diff / 60000)
-    if (mins < 1) return "just now"
+    if (mins < 1) return t.auditLogs.justNow
     if (mins < 60) return `${mins}m ago`
     const hrs = Math.floor(mins / 60)
     if (hrs < 24) return `${hrs}h ago`
@@ -142,9 +144,9 @@ export default function AuditLogPage() {
             <ClipboardList className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Audit Log</h1>
+            <h1 className="text-2xl font-bold tracking-tight">{t.auditLogs.title}</h1>
             <p className="text-sm text-muted-foreground">
-              A complete history of all flag and configuration changes.
+              {t.auditLogs.subtitle}
             </p>
           </div>
         </div>
@@ -156,21 +158,21 @@ export default function AuditLogPage() {
           <div className="p-2 bg-blue-500/10 rounded-lg"><Activity className="w-5 h-5 text-blue-500" /></div>
           <div>
             <div className="text-2xl font-bold">{logs.length}</div>
-            <div className="text-xs text-muted-foreground">Total Events</div>
+            <div className="text-xs text-muted-foreground">{t.auditLogs.totalEvents}</div>
           </div>
         </div>
         <div className="border rounded-xl p-4 bg-card flex items-center gap-3">
           <div className="p-2 bg-green-500/10 rounded-lg"><PlusCircle className="w-5 h-5 text-green-500" /></div>
           <div>
             <div className="text-2xl font-bold">{logs.filter(l => l.action.toLowerCase().includes("creat")).length}</div>
-            <div className="text-xs text-muted-foreground">Created</div>
+            <div className="text-xs text-muted-foreground">{t.auditLogs.created}</div>
           </div>
         </div>
         <div className="border rounded-xl p-4 bg-card flex items-center gap-3">
           <div className="p-2 bg-red-500/10 rounded-lg"><Trash2 className="w-5 h-5 text-red-500" /></div>
           <div>
             <div className="text-2xl font-bold">{logs.filter(l => l.action.toLowerCase().includes("delet")).length}</div>
-            <div className="text-xs text-muted-foreground">Deleted</div>
+            <div className="text-xs text-muted-foreground">{t.auditLogs.deleted}</div>
           </div>
         </div>
       </div>
@@ -181,7 +183,7 @@ export default function AuditLogPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             id="audit-search"
-            placeholder="Search by action, user, or flag key…"
+            placeholder={t.auditLogs.searchPlaceholder}
             className="pl-9"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -189,7 +191,7 @@ export default function AuditLogPage() {
         </div>
         <Button variant="outline" size="sm" onClick={fetchLogs} disabled={loading} id="audit-refresh-btn">
           <RefreshCw className={`w-4 h-4 mr-2 ${loading ? "animate-spin" : ""}`} />
-          Refresh
+          {t.auditLogs.refresh}
         </Button>
       </div>
 
@@ -207,10 +209,10 @@ export default function AuditLogPage() {
           <TableHeader>
             <TableRow className="bg-muted/50 hover:bg-muted/50">
               <TableHead className="w-10"></TableHead>
-              <TableHead>Action</TableHead>
-              <TableHead>Flag</TableHead>
-              <TableHead>Performed By</TableHead>
-              <TableHead>Timestamp</TableHead>
+              <TableHead>{t.auditLogs.colAction}</TableHead>
+              <TableHead>{t.auditLogs.colFlag}</TableHead>
+              <TableHead>{t.auditLogs.colPerformedBy}</TableHead>
+              <TableHead>{t.auditLogs.colTimestamp}</TableHead>
               <TableHead className="w-10"></TableHead>
             </TableRow>
           </TableHeader>
@@ -229,8 +231,8 @@ export default function AuditLogPage() {
               <TableRow>
                 <TableCell colSpan={6} className="text-center py-16 text-muted-foreground">
                   <ClipboardList className="w-10 h-10 mx-auto mb-3 opacity-30" />
-                  <p className="font-medium">No audit logs found</p>
-                  <p className="text-sm mt-1">Changes to flags and configurations will appear here.</p>
+                  <p className="font-medium">{t.auditLogs.noLogsFound}</p>
+                  <p className="text-sm mt-1">{t.auditLogs.noLogsDesc}</p>
                 </TableCell>
               </TableRow>
             ) : (
@@ -284,33 +286,33 @@ export default function AuditLogPage() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               {selectedLog && getActionIcon(selectedLog.action)}
-              Audit Log Detail
+              {t.auditLogs.detailTitle}
             </DialogTitle>
           </DialogHeader>
           {selectedLog && (
             <div className="space-y-4 text-sm">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Action</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t.auditLogs.labelAction}</p>
                   <Badge variant={getActionBadge(selectedLog.action) as any} className="capitalize">
                     {selectedLog.action}
                   </Badge>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Performed By</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t.auditLogs.labelPerformedBy}</p>
                   <p className="font-medium flex items-center gap-1">
                     <User className="w-3.5 h-3.5" />
                     {selectedLog.performed_by}
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Flag</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t.auditLogs.labelFlag}</p>
                   <p className="font-mono text-xs bg-muted px-2 py-1 rounded">
                     {selectedLog.flag?.key ?? "N/A"}
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Timestamp</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t.auditLogs.labelTimestamp}</p>
                   <p className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-muted-foreground" />
                     {formatDate(selectedLog.timestamp)}
@@ -320,7 +322,7 @@ export default function AuditLogPage() {
 
               {selectedLog.old_value && (
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Old Value</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t.auditLogs.labelOldValue}</p>
                   <pre className="bg-muted rounded-lg p-3 text-xs overflow-auto max-h-40">
                     {JSON.stringify(selectedLog.old_value, null, 2)}
                   </pre>
@@ -329,7 +331,7 @@ export default function AuditLogPage() {
 
               {selectedLog.new_value && (
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">New Value</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t.auditLogs.labelNewValue}</p>
                   <pre className="bg-muted rounded-lg p-3 text-xs overflow-auto max-h-40">
                     {JSON.stringify(selectedLog.new_value, null, 2)}
                   </pre>

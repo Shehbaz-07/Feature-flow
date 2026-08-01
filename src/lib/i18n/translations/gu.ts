@@ -1,112 +1,116 @@
 import type { Translations } from "./en"
 
 const gu: Translations = {
-  nav: {
-    signIn: "સાઇન ઇન",
-    getStarted: "શરૂ કરો",
-  },
-
+  nav: { signIn: "સાઇન ઇન", getStarted: "શરૂ કરો" },
   landing: {
-    badge: "વધુ સારું સોફ્ટવેર ઝડપથી મોકલો.",
-    hero: "તમારા સોફ્ટવેર માટે અંતિમ નિયંત્રણ કેન્દ્ર",
-    heroSub:
-      "FeatureFlow પ્રોજેક્ટ્સ, ફીચર્સ, સ્પ્રિન્ટ બોર્ડ, રિલીઝ અને બગ ટ્રૅકિંગને એક સુંદર, ઝડપી પ્લેટફોર્મમાં જોડે છે.",
-    startFree: "મફતમાં શરૂ કરો",
-    signIn: "સાઇન ઇન",
-
-    featuresHeading: "બનાવવા માટે તમારે જે જોઈએ",
-    featuresSub: "તમારી સંપૂર્ણ ટૂલચેઇનને એક સુંદર સમાધાન સાથે બદલો.",
-
-    feature1Title: "પ્રોજેક્ટ સ્પેસ",
-    feature1Desc:
-      "અલગ પ્રોજેક્ટ વર્કસ્પેસ અને રિયલ-ટાઇમ મેટ્રિક્સ સાથે તમારો સંપૂર્ણ પોર્ટફોલિયો ગોઠવો.",
-    feature2Title: "સ્પ્રિન્ટ બોર્ડ",
-    feature2Desc:
-      "ઉચ્ચ પ્રતિભાવશીલ ઍજાઇલ સ્પ્રિન્ટ બોર્ડ પર તમારી ફીચર્સ ખેંચો અને છોડો.",
-    feature3Title: "રિલીઝ નિયંત્રણ",
-    feature3Desc:
-      "સંકલિત રિલીઝ મેનેજમેન્ટ સાથે તમારા સોફ્ટવેર વર્ઝન્સ પ્લાન, ટ્રૅક અને ડિપ્લૉય કરો.",
-    feature4Title: "બગ ટ્રૅકિંગ",
-    feature4Desc:
-      "તમારી ફીચર્સ અને રિલીઝ સાથે સીધા જોડાયેલ બગ્સ કૅપ્ચર, પ્રાધાન્ય આપો અને ઠીક કરો.",
-
+    badge: "વધુ સારું સૉફ્ટવેર ઝડપથી પહોંચાડો.", hero: "તમારા સૉફ્ટવેર માટે અંતિમ નિયંત્રણ કેન્દ્ર",
+    heroSub: "FeatureFlow પ્રોજેક્ટ, ફીચર, સ્પ્રિન્ટ બોર્ડ, રિલીઝ અને બગ ટ્રેકિંગ એક સુંદર, ઝડપી પ્લેટફોર્મમાં લાવે છે.",
+    startFree: "મફતમાં શરૂ કરો", signIn: "સાઇન ઇન",
+    featuresHeading: "બનાવવા માટે જે જોઈએ તે", featuresSub: "તમારા સમગ્ર ટૂલચેઇનને એક ઉકેલ સાથે બદલો.",
+    feature1Title: "પ્રોજેક્ટ સ્પેસ", feature1Desc: "વ્યક્તિગત પ્રોજેક્ટ વર્કસ્પેસ સાથે તમારું પોર્ટફોલિયો ગોઠવો.",
+    feature2Title: "સ્પ્રિન્ટ બોર્ડ", feature2Desc: "ઝડપી સ્પ્રિન્ટ બોર્ડ પર ફીચર ખેંચો અને મૂકો.",
+    feature3Title: "રિલીઝ નિયંત્રણ", feature3Desc: "સૉફ્ટવેર સંસ્કરણ મેનેજ કરો.",
+    feature4Title: "બગ ટ્રેકિંગ", feature4Desc: "ફીચર સાથે જોડાયેલ બગ ઠીક કરો.",
     securityHeading: "એન્ટરપ્રાઇઝ-ગ્રેડ આઇસોલેશન",
-    securityDesc:
-      "PostgreSQL અને નેટિવ Row-Level Security પર નિર્મિત. તમારો દરેક ડેટા ગણિતીય રીતે અલગ અને સુરક્ષિત છે.",
-    createWorkspace: "તમારી વર્કસ્પેસ બનાવો",
-
-    footerTagline: "આધુનિક સોફ્ટવેર ટીમો માટે નિર્મિત.",
+    securityDesc: "PostgreSQL અને Row-Level Security પર નિર્મિત.",
+    createWorkspace: "તમારું વર્કસ્પેસ બનાવો",
+    footerTagline: "આધુનિક ટીમ માટે નિર્મિત.",
   },
-
   sidebar: {
-    workspace: "વર્કસ્પેસ",
-    featureFlags: "ફીચર ફ્લૅગ્સ",
-    settings: "સેટિંગ્સ",
-
-    dashboard: "ડૅશબોર્ડ",
-    projects: "પ્રોજેક્ટ્સ",
-    features: "ફીચર્સ",
-    releases: "રિલીઝ",
-    bugs: "બગ્સ",
-    sprintBoard: "સ્પ્રિન્ટ બોર્ડ",
-    groups: "જૂથો",
-    auditLogs: "ઑડિટ લૉગ્સ",
-    sdkDocs: "SDK ડૉક્સ",
+    workspace: "વર્કસ્પેસ", featureFlags: "ફીચર ફ્લેગ", settings: "સેટિંગ",
+    dashboard: "ડેશબોર્ડ", projects: "પ્રોજેક્ટ", features: "ફીચર",
+    releases: "રિલીઝ", bugs: "બગ", sprintBoard: "સ્પ્રિન્ટ બોર્ડ",
+    groups: "ગ્રૂપ", auditLogs: "ઓડિટ લૉગ", sdkDocs: "SDK ડૉક્સ",
   },
-
-  userMenu: {
-    settings: "સેટિંગ્સ",
-    signOut: "સાઇન આઉટ",
-  },
-
+  userMenu: { settings: "સેટિંગ", signOut: "સાઇન આઉટ" },
   dashboard: {
-    title: "ડૅશબોર્ડ",
-    subtitle: "FeatureFlow માં આપનું સ્વાગત છે. અહીં તમારી વર્કસ્પેસનો સારાંશ છે.",
-
-    totalProjects: "કુલ પ્રોજેક્ટ્સ",
-    activeFeatures: "સક્રિય ફીચર્સ",
-    plannedReleases: "આયોજિત રિલીઝ",
-    openBugs: "ખુલ્લા બગ્સ",
-
-    recentBugs: "તાજેતરના બગ્સ",
-    noBugs: "અત્યારે કોઈ સક્રિય બગ્સ નથી!",
-    upcomingReleases: "આગામી રિલીઝ",
-    noReleases: "કોઈ આગામી રિલીઝ નિર્ધારિત નથી.",
+    title: "ડેશબોર્ડ", subtitle: "FeatureFlow માં આપનું સ્વાગત છે.",
+    totalProjects: "કુલ પ્રોજેક્ટ", activeFeatures: "સક્રિય ફીચર",
+    plannedReleases: "આયોજિત રિલીઝ", openBugs: "ખુલ્લા બગ",
+    recentBugs: "તાજેતરના બગ", noBugs: "હવે કોઈ સક્રિય બગ નથી!",
+    upcomingReleases: "આગામી રિલીઝ", noReleases: "કોઈ આગામી રિલીઝ નિર્ધારિત નથી.",
   },
-
   settings: {
-    title: "સેટિંગ્સ",
-    subtitle: "તમારા એકાઉન્ટ સેટિંગ્સ અને પ્રાધાન્યતાઓ મેનેજ કરો.",
-
-    appearance: "દેખાવ",
-    appearanceDesc: "એપ્લિકેશનનો દેખાવ અને અનુભવ કસ્ટમાઇઝ કરો.",
-    theme: "થીમ",
-    themeDesc: "લાઇટ અને ડાર્ક મોડ વચ્ચે સ્વિચ કરો.",
-
-    language: "ભાષા",
-    languageDesc: "તમારી પ્રિય ભાષા પસંદ કરો.",
-    selectLanguage: "ભાષા પસંદ કરો",
-    languageSaved: "ભાષા સફળતાપૂર્વક અપડેટ થઈ",
-
-    profile: "પ્રોફાઇલ માહિતી",
-    profileDesc: "તમારું ડિસ્પ્લે નામ અપડેટ કરો. ફેરફારો તરત સેવ થાય છે.",
-    fullName: "પૂરું નામ",
-    namePlaceholder: "તમારું ડિસ્પ્લે નામ",
-    emailAddress: "ઇમેઇલ સરનામું",
-    emailNote: "ઇમેઇલ અહીં બદલી શકાતો નથી. તમારા વ્યવસ્થાપકનો સંપર્ક કરો.",
-    saveChanges: "ફેરફારો સેવ કરો",
-    saving: "સેવ થઈ રહ્યું છે…",
+    title: "સેટિંગ", subtitle: "તમારા એકાઉન્ટ સેટિંગ મેનેજ કરો.",
+    appearance: "દેખાવ", appearanceDesc: "એપ્લિકેશન કસ્ટમાઇઝ કરો.",
+    theme: "થીમ", themeDesc: "લાઇટ અને ડાર્ક મોડ વચ્ચે ફેરવો.",
+    language: "ભાષા", languageDesc: "તમારી પ્રિય ભાષા પસંદ કરો.",
+    selectLanguage: "ભાષા પસંદ કરો", languageSaved: "ભાષા સફળતાપૂર્વક અપડેટ થઈ",
+    profile: "પ્રોફાઇલ", profileDesc: "ડિસ્પ્લે નામ અપડેટ કરો.",
+    fullName: "પૂરું નામ", namePlaceholder: "ડિસ્પ્લે નામ",
+    emailAddress: "ઇ-મેઇલ", emailNote: "ઇ-મેઇલ અહીં બદલી શકાતો નથી.",
+    saveChanges: "ફેરફાર સાચવો", saving: "સાચવી રહ્યા છીએ…",
     profileSaved: "પ્રોફાઇલ સફળતાપૂર્વક અપડેટ થઈ",
-
-    security: "એકાઉન્ટ સુરક્ષા",
-    securityDesc: "તમારું એકાઉન્ટ Supabase Auth દ્વારા સુરક્ષિત છે.",
-    authProvider: "પ્રમાણીકરણ પ્રદાતા",
-    authProviderValue: "Supabase Auth દ્વારા ઇમેઇલ અને પાસવર્ડ",
+    security: "એકાઉન્ટ સુરક્ષા", securityDesc: "Supabase Auth દ્વારા સુરક્ષિત.",
+    authProvider: "પ્રમાણીકરણ", authProviderValue: "Supabase Auth – ઇ-મેઇલ & પાસવર્ડ",
     active: "સક્રિય",
   },
-
-  languageSwitcher: {
-    label: "ભાષા",
+  languageSwitcher: { label: "ભાષા" },
+  projects: {
+    title: "પ્રોજેક્ટ", subtitle: "વર્કસ્પેસ અને ઉત્પાદન મેનેજ કરો.",
+    newProject: "નવો પ્રોજેક્ટ", allProjects: "બધા પ્રોજેક્ટ",
+    allProjectsDesc: "તમામ પ્રોજેક્ટ યાદી.",
+    noProjects: "કોઈ પ્રોજેક્ટ મળ્યો નથી.",
+    colCode: "કોડ", colName: "નામ", colStatus: "સ્થિતિ",
+    colOwner: "માલિક", colCreatedAt: "બનાવ્યો", unknown: "અજ્ઞાત",
+  },
+  features: {
+    title: "ફીચર", subtitle: "ફીચર મેનેજ કરો.",
+    newFeature: "નવું ફીચર", allFeatures: "બધા ફીચર",
+    allFeaturesDesc: "ફીચર યાદી.",
+    noFeatures: "કોઈ ફીચર મળ્યો નથી.",
+    colProject: "પ્રોજેક્ટ", colTitle: "શીર્ષક", colStatus: "સ્થિતિ",
+    colPriority: "પ્રાથમિકતા", colAssignee: "સોંપેલ", unassigned: "સોંપ્યા વગર",
+  },
+  releases: {
+    title: "રિલીઝ", subtitle: "ઉત્પાદન રિલીઝ મેનેજ કરો.",
+    newRelease: "નવો રિલીઝ", allReleases: "બધા રિલીઝ",
+    noReleases: "કોઈ રિલીઝ મળ્યો નથી.",
+    colProject: "પ્રોજેક્ટ", colVersion: "વર્ઝન", colName: "નામ", colStatus: "સ્થિતિ", colType: "પ્રકાર",
+  },
+  bugs: {
+    title: "બગ", subtitle: "સમસ્યાઓ ટ્રૅક કરો.",
+    reportBug: "બગ રિપોર્ટ કરો", allBugs: "બધા બગ",
+    noBugs: "કોઈ બગ મળ્યો નથી.",
+    colProject: "પ્રોજેક્ટ", colTitle: "શીર્ષક", colStatus: "સ્થિતિ",
+    colSeverity: "ગંભીરતા", colReporter: "રિપોર્ટર", unknown: "અજ્ઞાત",
+  },
+  sprint: {
+    title: "સ્પ્રિન્ટ બોર્ડ", subtitle: "સ્થિતિ મુજબ ફીચરનો કૅન્બૅન દૃશ્ય.",
+    colBacklog: "બૅકલૉગ", colPlanned: "આયોજિત", colInProgress: "ચાલુ",
+    colReview: "સમીક્ષા", colTesting: "પરીક્ષણ", colReady: "તૈયાર", colReleased: "રિલીઝ",
+    unassigned: "સોંપ્યા વગર",
+  },
+  auditLogs: {
+    title: "ઓડિટ લૉગ", subtitle: "ફ્લૅગ ફેરફારોનો ઇતિહાસ.",
+    totalEvents: "કુલ ઘટના", created: "બનાવ્યો", deleted: "ભૂંસ્યો",
+    searchPlaceholder: "ક્રિયા, વપરાશકર્તા અથવા ફ્લૅગ કી શોધો…",
+    refresh: "રિફ્રેશ", noLogsFound: "ઓડિટ લૉગ મળ્યો નથી",
+    noLogsDesc: "ફ્લૅગ ફેરફારો અહીં દેખાશે.",
+    colAction: "ક્રિયા", colFlag: "ફ્લૅગ", colPerformedBy: "દ્વારા", colTimestamp: "સમય",
+    detailTitle: "ઓડિટ લૉગ વિગત",
+    labelAction: "ક્રિયા", labelPerformedBy: "દ્વારા", labelFlag: "ફ્લૅગ",
+    labelTimestamp: "સમય", labelOldValue: "જૂની કિંમત", labelNewValue: "નવી કિંમત", justNow: "હમણાં",
+  },
+  groups: {
+    title: "ગ્રૂપ", subtitle: "ટાર્ગેટ ફ્લૅગ રોલઆઉટ માટે ગ્રૂપ મેનેજ કરો.",
+    newGroup: "નવો ગ્રૂપ", totalGroups: "કુલ ગ્રૂપ", totalMembers: "કુલ સભ્ય",
+    searchPlaceholder: "ગ્રૂપ શોધો…",
+    refresh: "રિફ્રેશ", noGroupsSearch: "કોઈ ગ્રૂપ મળ્યો નથી",
+    noGroupsYet: "હજુ ગ્રૂપ નથી", noGroupsSearchHint: "બીજો કીવર્ડ ચકાસો.",
+    noGroupsHint: "ગ્રૂપ સભ્ય ટાર્ગેટ કરવા ગ્રૂપ બનાવો.",
+    createFirstGroup: "પ્રથમ ગ્રૂપ બનાવો",
+    member: "સભ્ય", members: "સભ્ય", more: "વધુ",
+    createTitle: "નવો ગ્રૂપ બનાવો", editTitle: "ગ્રૂપ સંપાદિત કરો",
+    labelGroupName: "ગ્રૂપ નામ", labelDescription: "વર્ણન", labelMemberIds: "સભ્ય IDs",
+    placeholderName: "દા.ત. beta-users", placeholderDescription: "વૈકલ્પિક વર્ણન",
+    placeholderMembers: "અલ્પવિરામ-અલગ IDs",
+    memberIdsHint: "અલ્પવિરામ વડે IDs લખો.",
+    cancel: "રદ કરો", creating: "બنаઈ રહ્યા…", createGroup: "ગ્રૂપ બনાવો",
+    saving: "સาচवী رহ्या…", saveChanges: "ફेरফार साचवો",
+    deleteTitle: "ભૂંસો", deleteDesc: "આ ક્રિયા પૂર્વવત્ કરી શકાતી નથી.",
+    deleteGroup: "ગ્રૂپ ભૂّسو", groupCreated: "બनाव्यो",
+    groupUpdated: "ग्रुप सफળ अपडेट", groupDeleted: "ভূँس्यो",
   },
 }
 

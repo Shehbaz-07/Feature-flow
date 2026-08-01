@@ -1,112 +1,117 @@
 import type { Translations } from "./en"
 
 const mr: Translations = {
-  nav: {
-    signIn: "साइन इन",
-    getStarted: "सुरू करा",
-  },
-
+  nav: { signIn: "साइन इन", getStarted: "सुरू करा" },
   landing: {
-    badge: "चांगले सॉफ्टवेअर जलद पाठवा.",
-    hero: "तुमच्या सॉफ्टवेअरसाठी अंतिम नियंत्रण केंद्र",
-    heroSub:
-      "FeatureFlow प्रकल्प, वैशिष्ट्ये, स्प्रिंट बोर्ड, रिलीज आणि बग ट्रॅकिंग एका सुंदर, जलद प्लॅटफॉर्ममध्ये एकत्र आणते.",
-    startFree: "विनामूल्य सुरू करा",
-    signIn: "साइन इन",
-
+    badge: "चांगले सॉफ्टवेअर जलद पाठवा.", hero: "तुमच्या सॉफ्टवेअरसाठी अंतिम नियंत्रण केंद्र",
+    heroSub: "FeatureFlow प्रकल्प, वैशिष्ट्ये, स्प्रिंट बोर्ड, रिलीज आणि बग ट्रॅकिंग एका सुंदर, जलद प्लॅटफॉर्ममध्ये एकत्र आणते.",
+    startFree: "विनामूल्य सुरू करा", signIn: "साइन इन",
     featuresHeading: "तयार करण्यासाठी तुम्हाला जे हवे ते",
     featuresSub: "तुमची संपूर्ण टूलचेन एका सुंदर उपायाने बदला.",
-
-    feature1Title: "प्रकल्प जागा",
-    feature1Desc:
-      "वेगळ्या प्रकल्प वर्कस्पेस आणि रिअल-टाइम मेट्रिक्ससह तुमचे संपूर्ण पोर्टफोलिओ व्यवस्थित करा.",
-    feature2Title: "स्प्रिंट बोर्ड",
-    feature2Desc:
-      "अत्यंत प्रतिसादशील ॲजाइल स्प्रिंट बोर्डवर तुमची वैशिष्ट्ये ड्रॅग आणि ड्रॉप करा.",
-    feature3Title: "रिलीज नियंत्रण",
-    feature3Desc:
-      "एकात्मिक रिलीज व्यवस्थापनासह तुमच्या सॉफ्टवेअर आवृत्त्या नियोजित, ट्रॅक आणि डिप्लॉय करा.",
-    feature4Title: "बग ट्रॅकिंग",
-    feature4Desc:
-      "तुमच्या वैशिष्ट्ये आणि रिलीजशी थेट जोडलेले बग कॅप्चर करा, प्राधान्य द्या आणि दुरुस्त करा.",
-
+    feature1Title: "प्रकल्प जागा", feature1Desc: "वेगळ्या प्रकल्प वर्कस्पेस आणि रिअल-टाइम मेट्रिक्ससह तुमचे पोर्टफोलिओ व्यवस्थित करा.",
+    feature2Title: "स्प्रिंट बोर्ड", feature2Desc: "ॲजाइल स्प्रिंट बोर्डवर तुमची वैशिष्ट्ये ड्रॅग आणि ड्रॉप करा.",
+    feature3Title: "रिलीज नियंत्रण", feature3Desc: "एकात्मिक रिलीज व्यवस्थापनासह तुमच्या सॉफ्टवेअर आवृत्त्या नियोजित करा.",
+    feature4Title: "बग ट्रॅकिंग", feature4Desc: "तुमच्या वैशिष्ट्यांशी थेट जोडलेले बग कॅप्चर करा आणि दुरुस्त करा.",
     securityHeading: "एंटरप्राइज-दर्जाचे आयसोलेशन",
-    securityDesc:
-      "PostgreSQL आणि नेटिव्ह Row-Level Security वर निर्मित. तुमचा प्रत्येक डेटा गणितीयरित्या वेगळा आणि सुरक्षित आहे.",
+    securityDesc: "PostgreSQL आणि नेटिव्ह Row-Level Security वर निर्मित.",
     createWorkspace: "तुमचे वर्कस्पेस तयार करा",
-
     footerTagline: "आधुनिक सॉफ्टवेअर संघांसाठी निर्मित.",
   },
-
   sidebar: {
-    workspace: "वर्कस्पेस",
-    featureFlags: "वैशिष्ट्य ध्वज",
-    settings: "सेटिंग्ज",
-
-    dashboard: "डॅशबोर्ड",
-    projects: "प्रकल्प",
-    features: "वैशिष्ट्ये",
-    releases: "रिलीज",
-    bugs: "बग",
-    sprintBoard: "स्प्रिंट बोर्ड",
-    groups: "गट",
-    auditLogs: "ऑडिट लॉग",
-    sdkDocs: "SDK डॉक्स",
+    workspace: "वर्कस्पेस", featureFlags: "वैशिष्ट्य ध्वज", settings: "सेटिंग्ज",
+    dashboard: "डॅशबोर्ड", projects: "प्रकल्प", features: "वैशिष्ट्ये",
+    releases: "रिलीज", bugs: "बग", sprintBoard: "स्प्रिंट बोर्ड",
+    groups: "गट", auditLogs: "ऑडिट लॉग", sdkDocs: "SDK डॉक्स",
   },
-
-  userMenu: {
-    settings: "सेटिंग्ज",
-    signOut: "साइन आउट",
-  },
-
+  userMenu: { settings: "सेटिंग्ज", signOut: "साइन आउट" },
   dashboard: {
-    title: "डॅशबोर्ड",
-    subtitle: "FeatureFlow मध्ये आपले स्वागत आहे. येथे तुमच्या वर्कस्पेसचे विहंगम दृश्य आहे.",
-
-    totalProjects: "एकूण प्रकल्प",
-    activeFeatures: "सक्रिय वैशिष्ट्ये",
-    plannedReleases: "नियोजित रिलीज",
-    openBugs: "उघडे बग",
-
-    recentBugs: "अलीकडील बग",
-    noBugs: "सध्या कोणतेही सक्रिय बग नाहीत!",
-    upcomingReleases: "येणारे रिलीज",
-    noReleases: "कोणतेही येणारे रिलीज नियोजित नाही.",
+    title: "डॅशबोर्ड", subtitle: "FeatureFlow मध्ये आपले स्वागत आहे.",
+    totalProjects: "एकूण प्रकल्प", activeFeatures: "सक्रिय वैशिष्ट्ये",
+    plannedReleases: "नियोजित रिलीज", openBugs: "उघडे बग",
+    recentBugs: "अलीकडील बग", noBugs: "सध्या कोणतेही सक्रिय बग नाहीत!",
+    upcomingReleases: "येणारे रिलीज", noReleases: "कोणतेही येणारे रिलीज नियोजित नाही.",
   },
-
   settings: {
-    title: "सेटिंग्ज",
-    subtitle: "तुमच्या खाते सेटिंग्ज आणि प्राधान्ये व्यवस्थापित करा.",
-
-    appearance: "स्वरूप",
-    appearanceDesc: "अनुप्रयोगाचे लुक आणि फील सानुकूलित करा.",
-    theme: "थीम",
-    themeDesc: "लाइट आणि डार्क मोडमध्ये स्विच करा.",
-
-    language: "भाषा",
-    languageDesc: "तुमची पसंतीची भाषा निवडा.",
-    selectLanguage: "भाषा निवडा",
-    languageSaved: "भाषा यशस्वीरित्या अपडेट झाली",
-
-    profile: "प्रोफाइल माहिती",
-    profileDesc: "तुमचे डिस्प्ले नाव अपडेट करा. बदल ताबडतोब जतन केले जातात.",
-    fullName: "पूर्ण नाव",
-    namePlaceholder: "तुमचे डिस्प्ले नाव",
-    emailAddress: "ईमेल पत्ता",
-    emailNote: "ईमेल येथे बदलता येणार नाही. तुमच्या प्रशासकाशी संपर्क साधा.",
-    saveChanges: "बदल जतन करा",
-    saving: "जतन होत आहे…",
+    title: "सेटिंग्ज", subtitle: "तुमच्या खाते सेटिंग्ज व्यवस्थापित करा.",
+    appearance: "स्वरूप", appearanceDesc: "अनुप्रयोगाचे लुक सानुकूलित करा.",
+    theme: "थीम", themeDesc: "लाइट आणि डार्क मोडमध्ये स्विच करा.",
+    language: "भाषा", languageDesc: "तुमची पसंतीची भाषा निवडा.",
+    selectLanguage: "भाषा निवडा", languageSaved: "भाषा यशस्वीरित्या अपडेट झाली",
+    profile: "प्रोफाइल माहिती", profileDesc: "तुमचे डिस्प्ले नाव अपडेट करा.",
+    fullName: "पूर्ण नाव", namePlaceholder: "तुमचे डिस्प्ले नाव",
+    emailAddress: "ईमेल पत्ता", emailNote: "ईमेल येथे बदलता येणार नाही.",
+    saveChanges: "बदल जतन करा", saving: "जतन होत आहे…",
     profileSaved: "प्रोफाइल यशस्वीरित्या अपडेट झाली",
-
-    security: "खाते सुरक्षा",
-    securityDesc: "तुमचे खाते Supabase Auth द्वारे सुरक्षित आहे.",
-    authProvider: "प्रमाणीकरण प्रदाता",
-    authProviderValue: "Supabase Auth द्वारे ईमेल आणि पासवर्ड",
+    security: "खाते सुरक्षा", securityDesc: "तुमचे खाते Supabase Auth द्वारे सुरक्षित आहे.",
+    authProvider: "प्रमाणीकरण प्रदाता", authProviderValue: "Supabase Auth द्वारे ईमेल आणि पासवर्ड",
     active: "सक्रिय",
   },
-
-  languageSwitcher: {
-    label: "भाषा",
+  languageSwitcher: { label: "भाषा" },
+  projects: {
+    title: "प्रकल्प", subtitle: "तुमचे वर्कस्पेस आणि उत्पादने व्यवस्थापित करा.",
+    newProject: "नवीन प्रकल्प", allProjects: "सर्व प्रकल्प",
+    allProjectsDesc: "तुम्हाला प्रवेश असलेल्या सर्व प्रकल्पांची यादी.",
+    noProjects: "कोणतेही प्रकल्प आढळले नाहीत.",
+    colCode: "कोड", colName: "नाव", colStatus: "स्थिती",
+    colOwner: "मालक", colCreatedAt: "तयार केले", unknown: "अज्ञात",
+  },
+  features: {
+    title: "वैशिष्ट्ये", subtitle: "प्रकल्पांमध्ये वैशिष्ट्ये व्यवस्थापित करा.",
+    newFeature: "नवीन वैशिष्ट्य", allFeatures: "सर्व वैशिष्ट्ये",
+    allFeaturesDesc: "सर्व प्रकल्पांच्या वैशिष्ट्यांची यादी.",
+    noFeatures: "कोणतेही वैशिष्ट्ये आढळले नाहीत.",
+    colProject: "प्रकल्प", colTitle: "शीर्षक", colStatus: "स्थिती",
+    colPriority: "प्राधान्य", colAssignee: "असाइनी", unassigned: "असाइन केलेले नाही",
+  },
+  releases: {
+    title: "रिलीज", subtitle: "तुमचे उत्पादन रिलीज व्यवस्थापित करा.",
+    newRelease: "नवीन रिलीज", allReleases: "सर्व रिलीज",
+    noReleases: "कोणतेही रिलीज आढळले नाहीत.",
+    colProject: "प्रकल्प", colVersion: "आवृत्ती", colName: "नाव", colStatus: "स्थिती", colType: "प्रकार",
+  },
+  bugs: {
+    title: "बग", subtitle: "प्रकल्पांमध्ये समस्या ट्रॅक करा.",
+    reportBug: "बग अहवाल द्या", allBugs: "सर्व बग",
+    noBugs: "कोणतेही बग आढळले नाहीत.",
+    colProject: "प्रकल्प", colTitle: "शीर्षक", colStatus: "स्थिती",
+    colSeverity: "तीव्रता", colReporter: "अहवालदार", unknown: "अज्ञात",
+  },
+  sprint: {
+    title: "स्प्रिंट बोर्ड", subtitle: "स्थितीनुसार सर्व वैशिष्ट्यांचे कानबान दृश्य.",
+    colBacklog: "बॅकलॉग", colPlanned: "नियोजित", colInProgress: "प्रगतीपथावर",
+    colReview: "पुनरावलोकन", colTesting: "चाचणी", colReady: "तयार", colReleased: "रिलीज झाले",
+    unassigned: "असाइन केलेले नाही",
+  },
+  auditLogs: {
+    title: "ऑडिट लॉग", subtitle: "सर्व ध्वज आणि कॉन्फिगरेशन बदलांचा संपूर्ण इतिहास.",
+    totalEvents: "एकूण घटना", created: "तयार केले", deleted: "हटवले",
+    searchPlaceholder: "क्रिया, वापरकर्ता किंवा ध्वज की द्वारे शोधा…",
+    refresh: "रिफ्रेश", noLogsFound: "कोणतेही ऑडिट लॉग आढळले नाहीत",
+    noLogsDesc: "ध्वज आणि कॉन्फिगरेशनमधील बदल येथे दिसतील.",
+    colAction: "क्रिया", colFlag: "ध्वज", colPerformedBy: "द्वारे केले", colTimestamp: "वेळ",
+    detailTitle: "ऑडिट लॉग तपशील",
+    labelAction: "क्रिया", labelPerformedBy: "द्वारे केले", labelFlag: "ध्वज",
+    labelTimestamp: "वेळ", labelOldValue: "जुनी किंमत", labelNewValue: "नवीन किंमत", justNow: "आत्ता",
+  },
+  groups: {
+    title: "गट", subtitle: "लक्ष्यित फीचर फ्लॅग रोलआउटसाठी वापरकर्ता गट व्यवस्थापित करा.",
+    newGroup: "नवीन गट", totalGroups: "एकूण गट", totalMembers: "एकूण सदस्य",
+    searchPlaceholder: "नाव किंवा वर्णनाने गट शोधा…",
+    refresh: "रिफ्रेश", noGroupsSearch: "तुमच्या शोधाशी जुळणारे कोणतेही गट नाहीत",
+    noGroupsYet: "अद्याप कोणतेही गट नाहीत", noGroupsSearchHint: "वेगळा कीवर्ड वापरून पहा.",
+    noGroupsHint: "गट सदस्यत्वाने वापरकर्त्यांना लक्ष्य करण्यासाठी गट तयार करा.",
+    createFirstGroup: "पहिला गट तयार करा",
+    member: "सदस्य", members: "सदस्य", more: "अधिक",
+    createTitle: "नवीन गट तयार करा", editTitle: "गट संपादित करा",
+    labelGroupName: "गटाचे नाव", labelDescription: "वर्णन", labelMemberIds: "सदस्य IDs",
+    placeholderName: "उदा. beta-users", placeholderDescription: "पर्यायी वर्णन",
+    placeholderMembers: "स्वल्पविरामाने विभक्त वापरकर्ता IDs",
+    memberIdsHint: "स्वल्पविरामाने विभक्त करून सदस्यांचे वापरकर्ता IDs प्रविष्ट करा.",
+    cancel: "रद्द करा", creating: "तयार होत आहे…", createGroup: "गट तयार करा",
+    saving: "जतन होत आहे…", saveChanges: "बदल जतन करा",
+    deleteTitle: "हटवा", deleteDesc: "ही क्रिया पूर्ववत केली जाऊ शकत नाही.",
+    deleteGroup: "गट हटवा", groupCreated: "तयार केले",
+    groupUpdated: "गट यशस्वीरित्या अपडेट झाला", groupDeleted: "हटवले",
   },
 }
 
