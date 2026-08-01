@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
+import { useTranslation } from "@/lib/i18n/context"
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -34,20 +35,6 @@ const LANGUAGES: { id: LangId; label: string }[] = [
   { id: "java",       label: "Java"       },
   { id: "ruby",       label: "Ruby"       },
   { id: "curl",       label: "cURL"       },
-]
-
-// ─── Section definitions ────────────────────────────────────────────────────────
-
-const SECTIONS: {
-  id: SectionId
-  label: string
-  icon: React.ComponentType<{ className?: string }>
-  description: string
-}[] = [
-  { id: "installation", label: "Installation",       icon: Terminal,    description: "Install the SDK package for your language or use the REST API directly." },
-  { id: "initialize",   label: "Initialize",         icon: Server,      description: "Configure the client with your API URL and environment ID." },
-  { id: "evaluate",     label: "Evaluate Flag",      icon: Zap,         description: "Check whether a feature flag is enabled for a given user or group." },
-  { id: "rollout",      label: "Percentage Rollout", icon: FlaskConical,description: "Understand how deterministic percentage-based rollouts work." },
 ]
 
 // ─── Code snippets ──────────────────────────────────────────────────────────────
@@ -259,24 +246,17 @@ curl -s -X POST "$API_URL/api/flags/evaluate" \\
   },
 }
 
-// ─── API Parameters ─────────────────────────────────────────────────────────────
-
-const API_PARAMS = [
-  { param: "flagKey",       type: "string",   required: true,  desc: "The unique key of the feature flag." },
-  { param: "environmentId", type: "UUID",     required: true,  desc: "The UUID of the target environment." },
-  { param: "userId",        type: "string",   required: false, desc: "Stable user identifier for targeting and rollouts." },
-  { param: "groups",        type: "string[]", required: false, desc: "Array of group names the user belongs to." },
-]
 
 // ─── CodeBlock ──────────────────────────────────────────────────────────────────
 
 function CodeBlock({ code, blockId }: { code: string; blockId: string }) {
+  const { t } = useTranslation()
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code)
     setCopied(true)
-    toast.success("Copied to clipboard")
+    toast.success(t.sdkDocs.copied)
     setTimeout(() => setCopied(false), 2000)
   }
 
@@ -297,8 +277,8 @@ function CodeBlock({ code, blockId }: { code: string; blockId: string }) {
           className="h-6 px-2 text-xs text-zinc-400 hover:text-white hover:bg-zinc-800 gap-1"
         >
           {copied
-            ? <><Check className="w-3 h-3" />Copied</>
-            : <><Copy className="w-3 h-3" />Copy</>}
+            ? <><Check className="w-3 h-3" />{t.sdkDocs.copied}</>
+            : <><Copy className="w-3 h-3" />{t.sdkDocs.copy}</>}
         </Button>
       </div>
       <pre className="bg-zinc-950 text-zinc-100 p-5 text-sm overflow-x-auto leading-relaxed min-h-[120px]">
@@ -339,8 +319,29 @@ function LangButton({
 // ─── Page ───────────────────────────────────────────────────────────────────────
 
 export default function SDKDocsPage() {
+  const { t } = useTranslation()
   const [activeSection, setActiveSection] = useState<SectionId>("installation")
   const [activeLang, setActiveLang] = useState<LangId>("javascript")
+
+  // ─── Section definitions (moved inside component to access `t`) ───
+  const SECTIONS: {
+    id: SectionId
+    label: string
+    icon: React.ComponentType<{ className?: string }>
+    description: string
+  }[] = [
+    { id: "installation", label: t.sdkDocs.sectionInstallLabel, icon: Terminal, description: t.sdkDocs.sectionInstallDesc },
+    { id: "initialize",   label: t.sdkDocs.sectionInitLabel,    icon: Server,   description: t.sdkDocs.sectionInitDesc },
+    { id: "evaluate",     label: t.sdkDocs.sectionEvalLabel,    icon: Zap,      description: t.sdkDocs.sectionEvalDesc },
+    { id: "rollout",      label: t.sdkDocs.sectionRolloutLabel, icon: FlaskConical, description: t.sdkDocs.sectionRolloutDesc },
+  ]
+
+  const API_PARAMS = [
+    { param: "flagKey",       type: "string",   required: true,  desc: t.sdkDocs.paramFlagKey },
+    { param: "environmentId", type: "UUID",     required: true,  desc: t.sdkDocs.paramEnvId },
+    { param: "userId",        type: "string",   required: false, desc: t.sdkDocs.paramUserId },
+    { param: "groups",        type: "string[]", required: false, desc: t.sdkDocs.paramGroups },
+  ]
 
   const currentSection = SECTIONS.find(s => s.id === activeSection)!
   const SectionIcon = currentSection.icon
@@ -353,16 +354,16 @@ export default function SDKDocsPage() {
           <BookOpen className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">SDK Documentation</h1>
+          <h1 className="text-2xl font-bold tracking-tight">{t.sdkDocs.title}</h1>
           <p className="text-sm text-muted-foreground">
-            Integrate FeatureFlow into your app in minutes — supports {LANGUAGES.length} languages.
+            {t.sdkDocs.subtitle}
           </p>
         </div>
       </div>
 
       {/* Supported Languages */}
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-sm text-muted-foreground">Supported:</span>
+        <span className="text-sm text-muted-foreground">{t.sdkDocs.supported}</span>
         {LANGUAGES.map(lang => (
           <Badge key={lang.id} variant="secondary" className="text-xs font-medium">
             {lang.label}
@@ -373,9 +374,9 @@ export default function SDKDocsPage() {
       {/* Overview cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
-          { icon: Globe, color: "blue", label: "REST API", desc: "A single HTTP endpoint compatible with any language or framework." },
-          { icon: Layers, color: "purple", label: "Deterministic Rollouts", desc: "Consistent bucketing per user — no random flip-flopping between sessions." },
-          { icon: Zap, color: "green", label: "Server-side Cache", desc: "In-memory caching keeps evaluation latency under 1 ms." },
+          { icon: Globe, color: "blue", label: t.sdkDocs.cardRestTitle, desc: t.sdkDocs.cardRestDesc },
+          { icon: Layers, color: "purple", label: t.sdkDocs.cardRolloutTitle, desc: t.sdkDocs.cardRolloutDesc },
+          { icon: Zap, color: "green", label: t.sdkDocs.cardCacheTitle, desc: t.sdkDocs.cardCacheDesc },
         ].map(card => {
           const Icon = card.icon
           return (
@@ -397,7 +398,7 @@ export default function SDKDocsPage() {
         {/* Desktop Sidebar — section nav */}
         <aside className="hidden md:flex flex-col gap-1 w-52 shrink-0">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 mb-1">
-            Sections
+            {t.sdkDocs.sections}
           </p>
           {SECTIONS.map(s => {
             const Icon = s.icon
@@ -484,7 +485,7 @@ export default function SDKDocsPage() {
               <div className="px-4 py-3 border-b bg-muted/50 flex items-center gap-2">
                 <Code2 className="w-4 h-4 text-primary" />
                 <h3 className="font-semibold text-sm">
-                  API Reference —{" "}
+                  {t.sdkDocs.apiRefTitle}{" "}
                   <code className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">
                     POST /api/flags/evaluate
                   </code>
@@ -494,10 +495,10 @@ export default function SDKDocsPage() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b bg-muted/20">
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">Parameter</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">Type</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">Required</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">Description</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.sdkDocs.colParam}</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.sdkDocs.colType}</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.sdkDocs.colRequired}</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t.sdkDocs.colDesc}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -524,7 +525,7 @@ export default function SDKDocsPage() {
                                 : "border text-muted-foreground"
                             )}
                           >
-                            {row.required ? "required" : "optional"}
+                            {row.required ? t.sdkDocs.required : t.sdkDocs.optional}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm text-muted-foreground">

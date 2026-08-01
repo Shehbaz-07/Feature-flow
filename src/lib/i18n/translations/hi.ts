@@ -185,6 +185,7 @@ const hi: Translations = {
     justNow: "अभी",
   },
 
+  // ── Groups Page ──────────────────────────────────────────────────────────────
   groups: {
     title: "समूह",
     subtitle: "लक्षित फीचर फ्लैग रोलआउट के लिए उपयोगकर्ता समूह प्रबंधित करें।",
@@ -221,6 +222,41 @@ const hi: Translations = {
     groupCreated: "बनाया गया",
     groupUpdated: "समूह सफलतापूर्वक अपडेट किया गया",
     groupDeleted: "हटाया गया",
+  },
+
+  // ── SDK Docs Page ────────────────────────────────────────────────────────────
+  sdkDocs: {
+    title: "SDK दस्तावेज़ीकरण",
+    subtitle: "मिनटों में FeatureFlow को अपने ऐप में एकीकृत करें — 7 भाषाओं का समर्थन करता है।",
+    supported: "समर्थित:",
+    sections: "अनुभाग",
+    copied: "कॉपी किया गया",
+    copy: "कॉपी करें",
+    apiRefTitle: "API संदर्भ —",
+    colParam: "पैरामीटर",
+    colType: "प्रकार",
+    colRequired: "आवश्यक",
+    colDesc: "विवरण",
+    required: "आवश्यक",
+    optional: "वैकल्पिक",
+    cardRestTitle: "REST API",
+    cardRestDesc: "किसी भी भाषा के अनुकूल एक HTTP एंडपॉइंट।",
+    cardRolloutTitle: "निर्धारित रोलआउट",
+    cardRolloutDesc: "प्रति उपयोगकर्ता समान परिणाम।",
+    cardCacheTitle: "सर्वर कैश",
+    cardCacheDesc: "1 ms से कम समय लेता है।",
+    sectionInstallLabel: "इंस्टॉलेशन",
+    sectionInstallDesc: "अपनी भाषा के लिए SDK इंस्टॉल करें या सीधे REST API का उपयोग करें।",
+    sectionInitLabel: "आरंभ करें",
+    sectionInitDesc: "अपना API URL और पर्यावरण ID सेट करें।",
+    sectionEvalLabel: "फ्लैग जांचें",
+    sectionEvalDesc: "जांचें कि किसी उपयोगकर्ता के लिए फीचर फ्लैग सक्षम है या नहीं।",
+    sectionRolloutLabel: "प्रतिशत रोलआउट",
+    sectionRolloutDesc: "समझें कि रोलआउट कैसे काम करता है।",
+    paramFlagKey: "फीचर फ्लैग की विशिष्ट कुंजी।",
+    paramEnvId: "लक्ष्य पर्यावरण का UUID।",
+    paramUserId: "रोलआउट के लिए उपयोगकर्ता ID।",
+    paramGroups: "उपयोगकर्ता के समूह।",
   },
 }
 
